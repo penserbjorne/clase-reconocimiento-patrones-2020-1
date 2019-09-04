@@ -75,6 +75,8 @@
 \usepackage[utf8x]{inputenc}                          % Definimos la codificacion.
 \usepackage{lmodern}                                  % Para poder usar acentos.
 \usepackage[spanish,es-nodecimaldot]{babel}           % Usaremos idioma español y punto decimal.
+\usepackage{listings}                                 % Para código
+\usepackage[numbered,framed]{matlab-prettifier}       % Para código M
 
 
 % *** CITATION PACKAGES ***
@@ -533,7 +535,7 @@ Abstract
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Reconocimiento de patrones, filtros, restauración, imágen.
+Reconocimiento de patrones, filtros, restauración, imágen, MATLAB.
 \end{IEEEkeywords}}
 
 
@@ -557,43 +559,102 @@ Reconocimiento de patrones, filtros, restauración, imágen.
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
+\section{Objetivos}
 
-\ifCLASSOPTIONcompsoc
-\IEEEraisesectionheading{\section{Introducción}\label{sec:introduction}}
-\else
+El alumno:
+
+\begin{enumerate}
+  \item Aprenderá a mejorar la imagen de acuerdo a las modificaciones que se le realizan originalmente.
+  \item Entenderá cómo aumentar las características de contraste y perfilado que apoyen a una mejor medición.
+\end{enumerate}
+
+
+
 \section{Introducción}
-\label{sec:introduction}
-\fi
-
  
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{L}{a} introducción.
+
+Esto es la introducción.
  
 \hfill Septiembre 4, 2019
 
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
-
-\section{Objetivos}
-The conclusion goes here.
-
 \section{Desarrollo}
-Aquí se incluyen los calculos.
+
+\subsection{A}
+
+Se tiene en el archivo de Midbrain.mat 2 imágenes a cargar. La primera es midbrain que es la imagen original.
+
+A esta imagen se le realizó normalización entre 0 y 1, y se le añadió ruido sal y pimienta y a una segunda imagen se le agrego gausiano. Un ejemplo es como se muestra en el código siguiente:
+
+\begin{lstlisting}[language=Matlab]
+midbrainNoise=imnoise(midbrainnor,'salt & pepper');
+\end{lstlisting}
+
+A continuación se modificó el contraste con la siguiente instrucción:
+
+\begin{lstlisting}[language=Matlab]
+for ii=1:ren
+  for jj=1:col
+    % get pixel value
+    oldpixel=midbrainNoise(ii,jj);
+      % check pixel value and assign new value
+      if oldpixel<0.4
+        new_pixel=(3/8)*oldpixel + (1/4)oldpixel;
+      elseif (oldpixel>0.4 && oldpixel<0.6)
+        new_pixel=oldpixel;
+      else
+        new_pixel = (3/8)*oldpixel +(3/8);
+      end
+      % save new pixel value in thresholded image
+      midbrainthesh(ii,jj)=new_pixel;
+  end
+end
+\end{lstlisting}
+
+Quedando la función de modificación del contraste como:
+
+\begin{lstlisting}[language=Matlab]
+y = (3/8) x + (1/4)x if x in [0.0 ; 0.4] , y > 0.40
+
+y = x                if x in [0.40 ; 0.60] (2)
+
+y = (3/8) x + (3/8)  if x in [0.6 ; 1.0]
+\end{lstlisting}
+
+En realidad no servia la imagen asi por loque hay que aplicar el paso contrario a la misma:
+
+\begin{enumerate}
+  \item Regresar a los valores iniciales de contraste
+  \item Quitar el ruido que se observa en la imagen. Usando un filtro para cada tipo de ruido, jugar con el tamaño de los filtros. 5x5, 9x9 y 11x11
+\end{enumerate}
+
+Realice las operaciones necesarias para revertir las funciones.
+
+\subsection{B}
+
+Ahora realice un filtrado para mejorar el procesamiento de la imagen. Y compare contra su imagen anterior para ver si mejoro.
+
+Cheque los valores máximos y mínimos de la imagen original midbrain. Y si es necesario normalice
+
+\subsection{C}
+
+Genere un clasificador que le de una imagen binario (por regresión, por ejemplo) que separe el mesencéfalo del resto de su imagen. Si su respuesta fue un método de clasificación, investigue y mencione como lo programaría con otro método.
+
+\subsection{D}
+
+Todas las segmentaciones realizadas en imágenes médicas se utilizan para medir volúmenes, áreas y obtener parámetros importantes para los doctores. A partir de la imagen binaria haga un programa para medir longitudinal, y transversalmente el mesencéfalo. Y diga cuál es la longitud o el área que ocupa.
 
 \section{Resultados}
-The conclusion goes here.
 
-\section{Conclusiones}
-The conclusion goes here.
+Los resultados deberán presentarse con los cálculos respectivos.
 
 \section{Código fuente}
+
+En esta sección deberán presentar el código fuente del programa en MATLAB (o en la herramienta que hayan utilizado en su defecto).
+
+\section{Conclusiones}
 The conclusion goes here.
 
 %\begin{figure}[!t]
@@ -655,8 +716,10 @@ The conclusion goes here.
 \begin{thebibliography}{1}
 
 \bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to {\LaTeX}}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+W.~Pratt, \emph{Digital Image Processing}, John Wiley \& Sons Inc, 2001.
+
+\bibitem{IEEEhowto:kopka}
+Gonzales Woods, \emph{Digital Image Processing}, 2004.
 
 \end{thebibliography}
 
