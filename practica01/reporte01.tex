@@ -530,7 +530,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-Abstract
+Este documento presenta la implementación de un clasificador bayesiano para imágenes médicas en Matlab. Sc muestran imágenes del proceso, así como del resultado final. Se da un breve repaso acerca del filtro de media y  se muestra el código fuente del clasificador implementado.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -574,11 +574,12 @@ El alumno:
  
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{L}{a} introducción.
+\IEEEPARstart{P}ara la clasificación de datos existen muchas aproximaciones posibles, B = medfilt2(A) realiza un filtrado medio de la imagen A en dos dimensiones. Cada píxel de salida contiene el valor medio en un vecindario de 3 por 3 alrededor del píxel correspondiente de la imagen de entrada. medfilt2 almohadillas de la imagen con 0s en los bordes, por lo que los valores de mediana para los puntos dentro de la mitad de la anchura del vecindario ([m n]/2) de los bordes pueden aparecer distorsionados.
 
-Esto es la introducción.
+
+
  
-\hfill Septiembre 4, 2019
+\hfill
 
 \section{Desarrollo}
 
@@ -652,10 +653,57 @@ Los resultados deberán presentarse con los cálculos respectivos.
 
 \section{Código fuente}
 
-En esta sección deberán presentar el código fuente del programa en MATLAB (o en la herramienta que hayan utilizado en su defecto).
+close all
+clear all
+clc 
+%Se carga la imagen
+im = imread('imagen.png');
+%Se convierte la imagen a escala de grises
+im_g = rgb2gray(im);
+%Se filtra la imagen con un filtro de media en 2d
+im_f = medfilt2(im_g);
+%Se ajusta el contraste de la imagen
+im_a = imadjust(im_f);
+%Se obtiene el tamanio de la matriz de la imagen
+[ncols,nrows]=size(im_a);
+%Se despliega la imagen para obtener la posicion de 
+%los pixeles semilla 
+imshow(im_a)
+%Se guardan los valores de los pixeles
+[x,y] = getpts;
+%Se convierte a valores enteros para usar como parametros
+xi=int32(x);
+yi=int32(y);
+%Se cierra la figura creada
+close all
+%Se binariza la imagen. Calculando el umbral de imagen adaptable
+%localmente elegido utilizando estadisticas de imagen 
+%de primer orden locales alrededor de cada pixel. 
+BW = imbinarize(im_a, 'adaptive');
+%Se convierten los valores obtenidos a enteros.
+bin = im2uint8(BW);
+%Se crea una mascara binaria para los pixeles
+%con intensidad de gris similar con una tolerancia de 1
+bw = grayconnected(bin,xi,yi,1);
+%Se obtiene el area total
+area = bwarea(bw);
+%Se recorta la imagen
+im_r = imcrop(bw,[285,300,95,70]);
+%Se muestran los resultados
+figure
+subplot(3,2,1),imshow(im_g),title('Original')
+subplot(3,2,2),imhist(im_g,128),title('Histograma de original')
+subplot(3,2,3),imshow(im_a),title('Filtrada y ajustada')
+subplot(3,2,4),imhist(im_a,128),title('Histograma filtrado y ajustado')
+subplot(3,2,5),imshow(bw),title('Mesencefalo')
+subplot(3,2,6),imshow(im_r),title('Imagen recortada')
 
 \section{Conclusiones}
 The conclusion goes here.
+
+El clasificador que implementamos es bastante sencillo de aplicar y entender, ya que solo emplea conceptos  esenciales  que devuelve resultados bastante aceptables para la clasificación de imágenes.
+Los resultados obtenidos con la imágen de prueba fueron bastante aceptables, ya que la mayoría de los pixeles están bien clasificados. Con algunos pequeños retoques es probable que la implementación sea capaz de tener un mejor desempeño.
+
 
 %\begin{figure}[!t]
 %\centering
