@@ -463,7 +463,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Práctica Mejoramiento de la Imágen}
+\title{Práctica 1. Mejoramiento de la Imágen}
 %
 %
 % author names and IEEE memberships
@@ -574,7 +574,9 @@ El alumno:
  
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{P}ara la clasificación de datos existen muchas aproximaciones posibles, B = medfilt2(A) realiza un filtrado medio de la imagen A en dos dimensiones. Cada píxel de salida contiene el valor medio en un vecindario de 3 por 3 alrededor del píxel correspondiente de la imagen de entrada. medfilt2 almohadillas de la imagen con 0s en los bordes, por lo que los valores de mediana para los puntos dentro de la mitad de la anchura del vecindario ([m n]/2) de los bordes pueden aparecer distorsionados.
+\IEEEPARstart{P}ara la clasificación de datos existen muchas aproximaciones posibles.
+B = medfilt2(A) 
+realiza un filtrado medio de la imagen A en dos dimensiones. Cada píxel de salida contiene el valor medio en un vecindario de 3 por 3 alrededor del píxel correspondiente de la imagen de entrada. medfilt2 almohadillas de la imagen con 0s en los bordes, por lo que los valores de mediana para los puntos dentro de la mitad de la anchura del vecindario ([m n]/2) de los bordes pueden aparecer distorsionados.
 
 
 
@@ -584,10 +586,14 @@ El alumno:
 \section{Desarrollo}
 
 \subsection{A}
+%\graphicspath{ {C:\Users\Enigm\clase-reconocimiento-patrones-2020-1\practica01\ReporteImagenes/RP_1} }
+%Path in Unix-like (Linux, Mac OS) format
+%\graphicspath{ {/home/user/images/} }
+%\includegraphics[scale=1.5]{lion-logo} 
 
 Se tiene en el archivo de Midbrain.mat 2 imágenes a cargar. La primera es midbrain que es la imagen original.
 
-A esta imagen se le realizó normalización entre 0 y 1, y se le añadió ruido sal y pimienta y a una segunda imagen se le agrego gausiano. Un ejemplo es como se muestra en el código siguiente:
+A esta imagen se le realizó normalización entre 0 y 1, y se le añadió ruido sal y pimienta y a una segunda imagen se le agrego gaussiano. Un ejemplo es como se muestra en el código siguiente:
 
 \begin{lstlisting}[language=Matlab]
 midbrainNoise=imnoise(midbrainnor,'salt & pepper');
@@ -635,9 +641,8 @@ Realice las operaciones necesarias para revertir las funciones.
 
 \subsection{B}
 
-Ahora realice un filtrado para mejorar el procesamiento de la imagen. Y compare contra su imagen anterior para ver si mejoro.
-
-Cheque los valores máximos y mínimos de la imagen original midbrain. Y si es necesario normalice
+Realizamos un filtrado para mejorar el procesamiento de la imagen y comparamos  contra nuestra imagen anterior para ver si mejoro.
+Checamos los valores máximos y mínimos de la imagen original midbrain. Normalizamos
 
 \subsection{C}
 
@@ -653,6 +658,7 @@ Los resultados deberán presentarse con los cálculos respectivos.
 
 \section{Código fuente}
 
+\begin{lstlisting}[language=Matlab]
 close all
 clear all
 clc 
@@ -697,7 +703,7 @@ subplot(3,2,3),imshow(im_a),title('Filtrada y ajustada')
 subplot(3,2,4),imhist(im_a,128),title('Histograma filtrado y ajustado')
 subplot(3,2,5),imshow(bw),title('Mesencefalo')
 subplot(3,2,6),imshow(im_r),title('Imagen recortada')
-
+\end{lstlisting}
 \section{Conclusiones}
 The conclusion goes here.
 
