@@ -9,25 +9,25 @@ im_g = rgb2gray(im);
 im_f = medfilt2(im_g);
 %Se ajusta el contraste de la imagen
 im_a = imadjust(im_f);
-%Se obtiene el tamaño de la matriz de la imagen
+%Se obtiene el tamanio de la matriz de la imagen
 [ncols,nrows]=size(im_a);
-%Se despliega la imagen para obtener la posici'on de 
+%Se despliega la imagen para obtener la posicion de 
 %los pixeles semilla 
 imshow(im_a)
 %Se guardan los valores de los pixeles
 [x,y] = getpts;
-%Se convierte a valores enteros para usar como par'ametros
+%Se convierte a valores enteros para usar como parametros
 xi=int32(x);
 yi=int32(y);
 %Se cierra la figura creada
 close all
-%Se binariza la imagen. Calcule el umbral de imagen adaptable
-%localmente elegido utilizando estadísticas de imagen 
-%de primer orden locales alrededor de cada píxel. 
+%Se binariza la imagen. Calculando el umbral de imagen adaptable
+%localmente elegido utilizando estadisticas de imagen 
+%de primer orden locales alrededor de cada pixel. 
 BW = imbinarize(im_a, 'adaptive');
 %Se convierten los valores obtenidos a enteros.
 bin = im2uint8(BW);
-%Se crea una m'ascara binaria para los pixeles
+%Se crea una mascara binaria para los pixeles
 %con intensidad de gris similar con una tolerancia de 1
 bw = grayconnected(bin,xi,yi,1);
 %Se obtiene el area total
