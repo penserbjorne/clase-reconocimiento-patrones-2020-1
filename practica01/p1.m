@@ -1,61 +1,44 @@
-% close all
-% clear all
-% clc
-
-% im = imread('imagen.png');
-% im_g = rgb2gray(im);
-
-% filtro5=fspecial('gaussian',[5,5]);
-% filtro9=fspecial('gaussian',[9,9]);
-% filtro11=fspecial('gaussian',[11,11]);
-% imFilG5=imfilter(im_g,filtro5);
-% imFilG9=imfilter(im_g,filtro9);
-% imFilG11=imfilter(im_g,filtro11);
-% imFilM=medfilt2(im_g);
-
-% mediaIntensidad=mean(imFilM(:));
-% im_bin= imFilM > mediaIntensidad;
-
-% [ren,col]=size(im);
-% im_r=imcrop(im_bin,[288,300,90,70]);
-
-% figure,title('Filtros')
-% subplot(2,4,1),imshow(im),title('Original')
-% subplot(2,4,2),imshow(im_g),title('Escala de grises')
-% subplot(2,4,3),imshow(imFilG5),title('Gausiano 5X5')
-% subplot(2,4,4),imshow(imFilG9),title('Gausiano 9X9')
-% subplot(2,4,5),imshow(imFilG11),title('Gausiano 11X11')
-% subplot(2,4,6),imshow(imFilM),title('Media no lineal')
-% subplot(2,4,7),imshow(im_bin),title('Binaria')
-% subplot(2,4,8),imshow(im_r),title('Binaria recortada')
-
 close all
 clear all
 clc 
-
+%Se carga la imagen
 im = imread('imagen.png');
-
+%Se convierte la imagen a escala de grises
 im_g = rgb2gray(im);
+%Se filtra la imagen con un filtro de media en 2d
 im_f = medfilt2(im_g);
-
+%Se ajusta el contraste de la imagen
 im_a = imadjust(im_f);
-
+%Se obtiene el tamaño de la matriz de la imagen
 [ncols,nrows]=size(im_a);
-
+%Se despliega la imagen para obtener la posici'on de 
+%los pixeles semilla 
 imshow(im_a)
+%Se guardan los valores de los pixeles
 [x,y] = getpts;
+%Se convierte a valores enteros para usar como par'ametros
 xi=int32(x);
 yi=int32(y);
-
+%Se cierra la figura creada
 close all
+%Se binariza la imagen. Calcule el umbral de imagen adaptable
+%localmente elegido utilizando estadísticas de imagen 
+%de primer orden locales alrededor de cada píxel. 
 BW = imbinarize(im_a, 'adaptive');
-%imshow(BW)
+%Se convierten los valores obtenidos a enteros.
 bin = im2uint8(BW);
+%Se crea una m'ascara binaria para los pixeles
+%con intensidad de gris similar con una tolerancia de 1
 bw = grayconnected(bin,xi,yi,1);
-
+%Se obtiene el area total
+area = bwarea(bw);
+%Se recorta la imagen
+im_r = imcrop(bw,[285,300,95,70]);
+%Se muestran los resultados
 figure
-subplot(3,3,1),imshow(im_f)
-subplot(3,3,2),imhist(im_f,128)
-subplot(3,3,4),imshow(im_a)
-subplot(3,3,5),imhist(im_a,128)
-subplot(3,3,7),imshow(bw)
+subplot(3,2,1),imshow(im_g),title('Original')
+subplot(3,2,2),imhist(im_g,128),title('Histograma de original')
+subplot(3,2,3),imshow(im_a),title('Filtrada y ajustada')
+subplot(3,2,4),imhist(im_a,128),title('Histograma filtrado y ajustado')
+subplot(3,2,5),imshow(bw),title('Mesencéfalo')
+subplot(3,2,6),imshow(im_r),title('Imagen recortada')
