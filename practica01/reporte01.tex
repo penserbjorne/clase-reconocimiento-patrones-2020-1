@@ -77,6 +77,8 @@
 \usepackage[spanish,es-nodecimaldot]{babel}           % Usaremos idioma español y punto decimal.
 \usepackage{listings}                                 % Para código
 \usepackage[numbered,framed]{matlab-prettifier}       % Para código M
+\usepackage{graphicx}
+% para imagenes
 
 
 % *** CITATION PACKAGES ***
@@ -490,11 +492,12 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 \author{Paul Sebastian~Aguilar Enriquez,
         Carlos Ignacio~Padilla Herrera
         y~Simón Eduardo~Ramírez Ancona% <-this % stops a space
-\IEEEcompsocitemizethanks{
-  \IEEEcompsocthanksitem Pie 
-  \IEEEcompsocthanksitem Pie
-}% <-this % stops a space
-\thanks{Referencia de pie}}
+%\IEEEcompsocitemizethanks{
+%  \IEEEcompsocthanksitem Pie 
+ % \IEEEcompsocthanksitem Pie
+%}% <-this % stops a space
+%\thanks{Referencia de pie}
+}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -630,14 +633,14 @@ y = x                if x in [0.40 ; 0.60] (2)
 y = (3/8) x + (3/8)  if x in [0.6 ; 1.0]
 \end{lstlisting}
 
-En realidad no servia la imagen asi por loque hay que aplicar el paso contrario a la misma:
+En realidad no servía la imagen asi, por lo que hay que aplicar el paso contrario a la misma:
 
 \begin{enumerate}
   \item Regresar a los valores iniciales de contraste
   \item Quitar el ruido que se observa en la imagen. Usando un filtro para cada tipo de ruido, jugar con el tamaño de los filtros. 5x5, 9x9 y 11x11
 \end{enumerate}
 
-Realice las operaciones necesarias para revertir las funciones.
+Realizamos las operaciones necesarias para revertir las funciones.
 
 \subsection{B}
 
@@ -654,7 +657,57 @@ Todas las segmentaciones realizadas en imágenes médicas se utilizan para medir
 
 \section{Resultados}
 
-Los resultados deberán presentarse con los cálculos respectivos.
+%Los resultados deberán presentarse con los cálculos respectivos.
+
+En las figuras se puede observar la comparación entre las imágenes a las que se les aplico el filtro gaussiano y las imágenes que entregó nuestro clasificador .
+En general se puede decir que el clasificador tiene un comportamiento bastante aceptable ya que la mayoría de los pixeles están bien clasificados en la clase correspondiente del mesencéfalo, sin embargo, puede ser mejorado, ya que algunas zonas no están bien clasificadas, sobre todo los límites de esta región, y se podría mejorar la detección.
+
+\graphicspath{{ReporteImagenes/}}
+Se empezó con la imagen original
+
+
+\begin{figure}[!h]
+	\caption{Imagen original con ruido sal y pimienta}
+	\includegraphics*[scale=1.0]{RP_1}
+	\centering
+\end{figure}
+
+
+\begin{figure}[!h]
+	\caption{Histograma de la imagen original}
+	\includegraphics*[scale=0.5]{RP_2}
+	\centering
+\end{figure}
+
+
+\begin{figure}[!h]
+	\caption{Imagen filtrada y ajustada}
+	\includegraphics*[scale=0.7]{RP_3}
+	\centering
+\end{figure}
+
+
+\begin{figure}[!h]
+	\caption{Histograma de la imagen filtrada y ajustada}
+	\includegraphics*[scale=0.5]{RP_4}
+	\centering
+\end{figure}
+
+
+\begin{figure}[!h]
+	\caption{Histograma de la imagen filtrada y ajustada}
+	\includegraphics*[scale=0.3]{RP_5}
+	\centering
+\end{figure}
+
+
+\begin{figure}[!h]
+	\caption{Imagen final recortada}
+	\includegraphics*[scale=0.8]{RP_6}
+	\centering
+\end{figure}
+
+
 
 \section{Código fuente}
 
@@ -662,7 +715,7 @@ Los resultados deberán presentarse con los cálculos respectivos.
 close all
 clear all
 clc 
-%Se carga la imagen
+%Se carga la n
 im = imread('imagen.png');
 %Se convierte la imagen a escala de grises
 im_g = rgb2gray(im);
@@ -705,9 +758,9 @@ subplot(3,2,5),imshow(bw),title('Mesencefalo')
 subplot(3,2,6),imshow(im_r),title('Imagen recortada')
 \end{lstlisting}
 \section{Conclusiones}
-The conclusion goes here.
 
-El clasificador que implementamos es bastante sencillo de aplicar y entender, ya que solo emplea conceptos  esenciales  que devuelve resultados bastante aceptables para la clasificación de imágenes.
+
+El clasificador que implementamos es bastante sencillo de aplicar y entender, y  que devuelve resultados bastante aceptables para la clasificación de imágenes.
 Los resultados obtenidos con la imágen de prueba fueron bastante aceptables, ya que la mayoría de los pixeles están bien clasificados. Con algunos pequeños retoques es probable que la implementación sea capaz de tener un mejor desempeño.
 
 
