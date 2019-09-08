@@ -598,13 +598,13 @@ Se tiene en el archivo de Midbrain.mat 2 imágenes a cargar. La primera es midbr
 
 A esta imagen se le realizó normalización entre 0 y 1, y se le añadió ruido sal y pimienta y a una segunda imagen se le agrego gaussiano. Un ejemplo es como se muestra en el código siguiente:
 
-\begin{lstlisting}[language=Matlab]
+\begin{lstlisting}[language=Matlab,basicstyle=\small]
 midbrainNoise=imnoise(midbrainnor,'salt & pepper');
 \end{lstlisting}
 
 A continuación se modificó el contraste con la siguiente instrucción:
 
-\begin{lstlisting}[language=Matlab]
+\begin{lstlisting}[language=Matlab,basicstyle=\small]
 for ii=1:ren
   for jj=1:col
     % get pixel value
@@ -625,7 +625,7 @@ end
 
 Quedando la función de modificación del contraste como:
 
-\begin{lstlisting}[language=Matlab]
+\begin{lstlisting}[language=Matlab,basicstyle=\small]
 y = (3/8) x + (1/4)x if x in [0.0 ; 0.4] , y > 0.40
 
 y = x                if x in [0.40 ; 0.60] (2)
@@ -711,7 +711,7 @@ Se empezó con la imagen original
 
 \section{Código fuente}
 
-\begin{lstlisting}[language=Matlab]
+\begin{lstlisting}[language=Matlab,basicstyle=\small]
 close all
 clear all
 clc 
