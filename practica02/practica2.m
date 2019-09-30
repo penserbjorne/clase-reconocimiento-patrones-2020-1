@@ -362,7 +362,7 @@ for s=1:3
                     im4c(x, y) = 127;
             end
             
-            if y3 > y1 && y3 > y2
+            if y3 >= y1 && y3 >= y2
                     % Clase 3
                     im4c(x, y) = 0;
             end
