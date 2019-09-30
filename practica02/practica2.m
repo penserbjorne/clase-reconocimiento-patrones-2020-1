@@ -6,24 +6,24 @@ clear variables;
 clear global;
 clc;
 
-%% Abrimos imágenes y las recortamos 
+% Abrimos imagenes y las recortamos 
 
-% Tamaño a utilizar en las imágenes
+% Tamaño a utilizar en las imagenes
 ren = 600;
 col = 600;
 tot = ren*col;
 
-% Abrimos imágenes de entrenamiento como double
+% Abrimos imagenes de entrenamiento como double
 im1 = double(imread('im1.jpg'));
 im2 = double(imread('im2.jpg'));
 im3 = double(imread('im3.jpg'));
 
-% Recortamos imágenes
+% Recortamos imagenes
 im1 = im1(1:ren,1:col);
 im2 = im2(1:ren,1:col);
 im3 = im3(1:ren,1:col);
 
-%% Filtramos las imágenes con un filtro gaussiano
+%% Filtramos las imagenes con un filtro gaussiano
 
 % imgaussfilt filtra la imagen con un kernel alisador 2-D de Gauss con
 % desviación estándar de 0,5.
@@ -31,9 +31,9 @@ im1f = imgaussfilt(im1);
 im2f = imgaussfilt(im2);
 im3f = imgaussfilt(im3);
 
-%% Creamos las mascaras sobre las imagenes filtradas
+% Creamos las mascaras sobre las imagenes filtradas
 
-%%%% Mascaras de imágen 1
+% Mascaras de imagen 1
 figure;imagesc(im1f);colormap(gray); axis square; title('Centro 1');
 mask11=createMask(drawfreehand());
 close all
@@ -46,7 +46,7 @@ figure;imagesc(im1f);colormap(gray); axis square; title('Exterior 1');
 mask31=createMask(drawfreehand());
 close all
 
-%%%% Mascaras de imágen 2
+% Mascaras de imagen 2
 figure;imagesc(im2f);colormap(gray); axis square; title('Centro 2');
 mask12=createMask(drawfreehand());
 close all
@@ -59,7 +59,7 @@ figure;imagesc(im2f);colormap(gray); axis square; title('Exterior 2');
 mask32=createMask(drawfreehand());
 close all
 
-%%%% Mascaras de imágen 3
+% Mascaras de imagen 3
 figure;imagesc(im3f);colormap(gray); axis square; title('Centro 3');
 mask13=createMask(drawfreehand());
 close all
@@ -72,7 +72,7 @@ figure;imagesc(im3f);colormap(gray); axis square; title('Exterior 3');
 mask33=createMask(drawfreehand());
 close all
 
-%% Aplicamos las mascaras a las imágenes
+% Aplicamos las mascaras a las imagenes
 
 % Obtenemos las regiones de la clase 1
 r11 = immultiply(im1f,double(mask11));
@@ -89,11 +89,11 @@ r31 = immultiply(im1f,double(mask31));
 r32 = immultiply(im2f,double(mask32));
 r33 = immultiply(im3f,double(mask33));
 
-%% Desplegamos imágenes filtradas
+% Desplegamos imagenes filtradas
 
 figure;
 
-%%%% Mascaras de imágen 1
+% Mascaras de imagen 1
 subplot(3, 5, 1);
 imagesc(im1); axis square; title('Original 1');
 
@@ -109,7 +109,7 @@ imagesc(r21);colormap(gray); axis square; title('Halo 1');
 subplot(3, 5, 5);
 imagesc(r31);colormap(gray); axis square; title('Exterior 1');
 
-%%%% Mascaras de imágen 2
+%%%% Mascaras de imagen 2
 subplot(3, 5, 6);
 imagesc(im2); axis square; title('Original 2');
 
@@ -125,7 +125,7 @@ imagesc(r22);colormap(gray); axis square; title('Halo 2');
 subplot(3, 5, 10);
 imagesc(r32);colormap(gray); axis square; title('Exterior 2');
 
-%%%% Mascaras de imágen 3
+%%%% Mascaras de imagen 3
 subplot(3, 5, 11);
 imagesc(im3); axis square; title('Original 3');
 
@@ -309,15 +309,15 @@ covInv1 = inv(cov1);
 covInv2 = inv(cov2);
 covInv3 = inv(cov3);
 
-%% Por fin! Clasifiquemos una imágen
+%% Por fin! Clasifiquemos una imagen
 
-% Abrimos imágen a clasificar como double
+% Abrimos imagen a clasificar como double
 im4 = double(imread('im4.jpg'));
 
-% Recortamos imágen
+% Recortamos imagen
 im4 = im4(1:ren,1:col);
 
-% Filtramos la imágen
+% Filtramos la imagen
 im4f = imgaussfilt(im4);
 
 % Variables para la diferencia entre elementos (x-u)(y-u)
@@ -325,10 +325,10 @@ dif1 = zeros([3 1]);
 dif2 = zeros([3 1]);
 dif3 = zeros([3 1]);
 
-% Creamos la imágen que vamos a mostrar como clasificada
+% Creamos la imagen que vamos a mostrar como clasificada
 im4c = zeros([ren col]);
 
-% Recorremos imágen para procesar pixel a pixel
+% Recorremos imagen para procesar pixel a pixel
 for s=1:3
     for x=1:ren
         for y=1:col
@@ -370,7 +370,7 @@ for s=1:3
     end
 end
 
-% Mostramos imágen clasificads
+% Mostramos imagen clasificads
 figure;
 subplot(1, 3, 1);
 imagesc(im4);colormap(gray); axis square; title('Original');
