@@ -352,18 +352,19 @@ for s=1:3
             y2 = ((-1/2) * dif2' * covInv2 * dif2) + ((-1/2) * logCov(2)) + logProb(2);
             y3 = ((-1/2) * dif3' * covInv3 * dif3) + ((-1/2) * logCov(3)) + logProb(3);
             
-            if y1 > y2
-                if y1 > y3 
+            if y1 >= y2 && y1 >= y3
                     % Clase 1
                     im4c(x, y) = 255;
-                end
-                % Clase 3
-                im4c(x, y) = 0;
-            else
-                if y2 > y3
+            end
+            
+            if y2 >= y1 && y2 >= y3
                     % Clase 2
                     im4c(x, y) = 127;
-                end
+            end
+            
+            if y3 > y1 && y3 > y2
+                    % Clase 3
+                    im4c(x, y) = 0;
             end
         end
     end
