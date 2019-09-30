@@ -670,7 +670,8 @@ for y=1:col
 if( mr1(((ren * (s-1)) + x),y) ~= 0)
 % Diagonal para la clase 1
  cov1(1, 1) = cov1(1, 1) + 
- ((mr1(((ren * (s-1)) + x),y) - med1(1)) ^2);
+ ((mr1(((ren * (s-1)) + x),y)
+  - med1(1)) ^2);
 cov1(2, 2) = cov1(2, 2) + 
 (((ren * (s-1)) - med1(2)) ^2);
 cov1(3, 3) = cov1(3, 3) +
@@ -994,7 +995,8 @@ for s=1:3
 for x=1:ren
 for y=1:col
 if( mr2(((ren * (s-1)) + x),y) ~= 0)
-med2(1) = med2(1) + mr2(((ren * (s-1)) + x),y);
+med2(1) = med2(1) + 
+mr2(((ren * (s-1)) + x),y);
 med2(2) = med2(2) + x;
 med2(3) = med2(3) + y;
 cont = cont + 1;
@@ -1010,7 +1012,8 @@ for s=1:3
 for x=1:ren
 for y=1:col
 if( mr3(((ren * (s-1)) + x),y) ~= 0)
-med3(1) = med3(1) + mr3(((ren * (s-1)) + x),y);
+med3(1) = med3(1) + 
+mr3(((ren * (s-1)) + x),y);
 med3(2) = med3(2) + x;
 med3(3) = med3(3) + y;
 cont = cont + 1;
