@@ -9,7 +9,7 @@ clc;
 %% Abrimos imágenes y las recortamos 
 
 % Tamaño a utilizar en las imágenes
-ren = 385;
+ren = 600;
 col = 600;
 tot = ren*col;
 
