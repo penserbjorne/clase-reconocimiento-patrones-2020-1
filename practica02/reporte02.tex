@@ -419,7 +419,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 
 \author{Paul Sebastian~Aguilar Enriquez,
         Carlos Ignacio~Padilla Herrera
-        y~Simón Eduardo~Ramírez Ancona% <-this % stops a space
+        y ~Simón Eduardo~Ramírez Ancona% <-this % stops a space
 %\IEEEcompsocitemizethanks{
 %  \IEEEcompsocthanksitem Pie 
  % \IEEEcompsocthanksitem Pie
@@ -466,7 +466,7 @@ Este documento presenta la implementación de un clasificador bayesiano para im�
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Reconocimiento de patrones, filtros, restauración, imágen, MATLAB.
+Pattern Recognition, Bayesian, Filters, Galaxies, Covariance, MATLAB.
 \end{IEEEkeywords}}
 
 
@@ -507,13 +507,13 @@ El alumno:
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{P}ara la clasificación de datos existen muchas aproximaciones posibles, ya sean supervisadas o no supervisadas. Entre ellos se encuentra el enfoque bayesiano que ofrece clasificadores optimos.
 El clasificador bayesiano es un tipo de clasificador supervisado basado en la probabilidad, el teorema de Bayes y conocimiento a priori, es decir, probabilidad de que se tiene antes de realizar el ejercicio. Realiza la asignación en alguna de las clases mediante el cálculo de la probabilidad de pertenecer a cada una de ellas, realizandose la asignación de mayor probabilidad
-El teorema de Bayes sobre el cual se fundamente este clasificador es el siguiente
+El teorema de Bayes sobre el cual se fundamente este clasificador es el siguiente:
 P(A|B)= P(A,B)/P(B)=P(A)*P(B|A)/P(B)						(1)
 Donde P(A) es la probabilidad del evento A, P(B) es la probabilidad del evento B, P(A|B) es la probabilidad de A dado B y P(B|A) es la probabilidad de B dado A.
 En imagenes, esta clase de clasificadores se emplean para la clasificacion de pixeles, y pueden ser usados en una amplia gama de aplicaciones, como análisis de imagenes medicas, sistemas biométricos, procesamiento de imagenes, etc.
 Para obtener la probabilidad de que un elemento pertenezca a una clase se ocupa la ecuación 1 haciendo el término normalizador P(B) igual a 1 y se obtiene:
 Yk=P(x|Ck)*P(Ck)					(2)
-Donde Yk es la probabilida de pertenecer a la clase k.
+Donde Yk es la probabilidad de pertenecer a la clase k.
 P(x|Ck) es la probabilidad de x dada la clase k y P(Ck) es la probabilidad de la clase k.
 
 
@@ -524,38 +524,46 @@ P(x|Ck) es la probabilidad de x dada la clase k y P(Ck) es la probabilidad de la
 
 \section{Desarrollo}
 
-\subsection{A}
+
 %\graphicspath{ {C:\Users\Enigm\clase-reconocimiento-patrones-2020-1\practica01\ReporteImagenes/RP_1} }
 %Path in Unix-like (Linux, Mac OS) format
 %\graphicspath{ {/home/user/images/} }
 %\includegraphics[scale=1.5]{lion-logo} 
 
 En las figuras mostradas se puede observar el resultado de aplicar el recorte para que solo quede la información del espacio vacio y de la aplicación  de un filtro para homogeneizar el color de cada una de las clases.
-Este preprocesamiento de las imágenes se realiza para reducir el ruido y poder obtener un mejor resultado.
+Este preprocesamiento de las imágenes se realiza para reducir el ruido y homogeneizar las imagenes y poder obtener un mejor resultado.
 
 \begin{lstlisting}[language=Matlab,basicstyle=\small]
 midbrainNoise=imnoise(midbrainnor,'salt & pepper');
 \end{lstlisting}
 
-A continuación se modificó el contraste con la siguiente instrucción:
+A continuación se modificó el tamaño y propiedades de las imagenes para homogeneizarlas:
 
-\begin{lstlisting}[language=Matlab,basicstyle=\small]
-for ii=1:ren
-  for jj=1:col
-    % get pixel value
-    oldpixel=midbrainNoise(ii,jj);
-      % check pixel value and assign new value
-      if oldpixel<0.4
-        new_pixel=(3/8)*oldpixel + (1/4)oldpixel;
-      elseif (oldpixel>0.4 && oldpixel<0.6)
-        new_pixel=oldpixel;
-      else
-        new_pixel = (3/8)*oldpixel +(3/8);
-      end
-      % save new pixel value in thresholded image
-      midbrainthesh(ii,jj)=new_pixel;
-  end
-end
+\begin{lstlisting}[language=Matlab, basicstyle=\small]
+
+% Tamanio a utilizar en las imagenes
+ren = 600;
+col = 600;
+tot = ren*col;
+
+% Abrimos imagenes de entrenamiento como double
+im1 = double(imread('im1.jpg'));
+im2 = double(imread('im2.jpg'));
+im3 = double(imread('im3.jpg'));
+
+% Recortamos imagenes
+im1 = im1(1:ren,1:col);
+im2 = im2(1:ren,1:col);
+im3 = im3(1:ren,1:col);
+
+%% Filtramos las imagenes con un filtro gaussiano
+
+% imgaussfilt filtra la imagen con un kernel alisador 2-D de Gauss con
+% desviacion estandar de 0,5.
+im1f = imgaussfilt(im1);
+im2f = imgaussfilt(im2);
+im3f = imgaussfilt(im3);
+
 \end{lstlisting}
 
 Quedando la función de modificación del contraste como:
@@ -647,7 +655,6 @@ Se empezó con la imagen original
 \section{Código fuente}
 
 \begin{lstlisting}[language=Matlab,basicstyle=\small]
-
 %% Limpiamos entorno
 
 close all;
@@ -655,30 +662,35 @@ close all;
 clear variables;
 clear global;
 clc;
- 
 
+% Abrimos imagenes y las recortamos 
 
-
+% Tamanio a utilizar en las imagenes
 ren = 600;
 col = 600;
 tot = ren*col;
 
-
+% Abrimos imagenes de entrenamiento como double
 im1 = double(imread('im1.jpg'));
 im2 = double(imread('im2.jpg'));
 im3 = double(imread('im3.jpg'));
 
-
+% Recortamos imagenes
 im1 = im1(1:ren,1:col);
 im2 = im2(1:ren,1:col);
 im3 = im3(1:ren,1:col);
 
+%% Filtramos las imagenes con un filtro gaussiano
 
+% imgaussfilt filtra la imagen con un kernel alisador 2-D de Gauss con
+% desviacion estandar de 0,5.
 im1f = imgaussfilt(im1);
 im2f = imgaussfilt(im2);
 im3f = imgaussfilt(im3);
 
+% Creamos las mascaras sobre las imagenes filtradas
 
+% Mascaras de imagen 1
 figure;imagesc(im1f);colormap(gray); axis square; title('Centro 1');
 mask11=createMask(drawfreehand());
 close all
@@ -691,7 +703,7 @@ figure;imagesc(im1f);colormap(gray); axis square; title('Exterior 1');
 mask31=createMask(drawfreehand());
 close all
 
-
+% Mascaras de imagen 2
 figure;imagesc(im2f);colormap(gray); axis square; title('Centro 2');
 mask12=createMask(drawfreehand());
 close all
@@ -704,7 +716,7 @@ figure;imagesc(im2f);colormap(gray); axis square; title('Exterior 2');
 mask32=createMask(drawfreehand());
 close all
 
-
+% Mascaras de imagen 3
 figure;imagesc(im3f);colormap(gray); axis square; title('Centro 3');
 mask13=createMask(drawfreehand());
 close all
@@ -717,7 +729,7 @@ figure;imagesc(im3f);colormap(gray); axis square; title('Exterior 3');
 mask33=createMask(drawfreehand());
 close all
 
-
+% Aplicamos las mascaras a las imagenes
 
 % Obtenemos las regiones de la clase 1
 r11 = immultiply(im1f,double(mask11));
@@ -734,11 +746,11 @@ r31 = immultiply(im1f,double(mask31));
 r32 = immultiply(im2f,double(mask32));
 r33 = immultiply(im3f,double(mask33));
 
-
+% Desplegamos imagenes filtradas
 
 figure;
 
-
+% Mascaras de imagen 1
 subplot(3, 5, 1);
 imagesc(im1); axis square; title('Original 1');
 
@@ -754,7 +766,7 @@ imagesc(r21);colormap(gray); axis square; title('Halo 1');
 subplot(3, 5, 5);
 imagesc(r31);colormap(gray); axis square; title('Exterior 1');
 
-
+%%%% Mascaras de imagen 2
 subplot(3, 5, 6);
 imagesc(im2); axis square; title('Original 2');
 
@@ -770,7 +782,7 @@ imagesc(r22);colormap(gray); axis square; title('Halo 2');
 subplot(3, 5, 10);
 imagesc(r32);colormap(gray); axis square; title('Exterior 2');
 
-
+%%%% Mascaras de imagen 3
 subplot(3, 5, 11);
 imagesc(im3); axis square; title('Original 3');
 
@@ -787,7 +799,7 @@ subplot(3, 5, 15);
 imagesc(r33);colormap(gray); axis square; title('Exterior 3');
 %% Calculamos la probabilidad de cada clase
 
-
+% Calculamos la probabilidad de cada region/clase
 probC1 = (sum(mask11(:))+sum(mask12(:))+sum(mask13(:)))/(3*tot);
 probC2 = (sum(mask21(:))+sum(mask22(:))+sum(mask23(:)))/(3*tot);
 probC3 = (sum(mask31(:))+sum(mask32(:))+sum(mask33(:)))/(3*tot);
@@ -954,15 +966,15 @@ covInv1 = inv(cov1);
 covInv2 = inv(cov2);
 covInv3 = inv(cov3);
 
+%% Por fin! Clasifiquemos una imagen
 
-
-
+% Abrimos imagen a clasificar como double
 im4 = double(imread('im4.jpg'));
 
-
+% Recortamos imagen
 im4 = im4(1:ren,1:col);
 
-
+% Filtramos la imagen
 im4f = imgaussfilt(im4);
 
 % Variables para la diferencia entre elementos (x-u)(y-u)
@@ -970,10 +982,10 @@ dif1 = zeros([3 1]);
 dif2 = zeros([3 1]);
 dif3 = zeros([3 1]);
 
-
+% Creamos la imagen que vamos a mostrar como clasificada
 im4c = zeros([ren col]);
 
-
+% Recorremos imagen para procesar pixel a pixel
 for s=1:3
 for x=1:ren
 for y=1:col
@@ -1015,7 +1027,7 @@ end
 end
 end
 
-
+% Mostramos imagen clasificads
 figure;
 subplot(1, 3, 1);
 imagesc(im4);colormap(gray); axis square; title('Original');
@@ -1025,6 +1037,7 @@ imagesc(im4f);colormap(gray); axis square; title('Filtrada');
 
 subplot(1, 3, 3);
 imagesc(im4c);colormap(gray); axis square; title('Clasificada');
+
 
 \end{lstlisting}
 \section{Conclusiones}
