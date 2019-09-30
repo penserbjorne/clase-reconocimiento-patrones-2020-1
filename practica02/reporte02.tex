@@ -577,8 +577,12 @@ El alumno:
  
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{P}ara la clasificación de datos existen muchas aproximaciones posibles.
-B = medfilt2(A) 
+\IEEEPARstart{P}ara la clasificación de datos existen muchas aproximaciones posibles, ya sean supervisadas o no supervisadas. Entre ellos se encuentra el enfoque bayesiano que ofrece clasificadores optimos.
+El clasificador bayesiano es un tipo de clasificador supervisado basado en la probabilidad, el teorema de Bayes y conocimiento a priori, es decir, probabilidad de que se tiene antes de realizar el ejercicio. Realiza la asignación en alguna de las clases mediante el cálculo de la probabilidad de pertenecer a cada una de ellas, realizandose la asignación de mayor probabilidad
+El teorema de Bayes sobre el cual se fundamente este clasificador es el siguiente
+P(A|B)= P(A,B)/P(B)=P(A)*P(B|A)/P(B)						(1)
+Donde P(A) es la probabilidad del evento A, P(B) es la probabilidad del evento B, P(A|B) es la probabilidad de A dado B y P(B|A) es la probabilidad de B dado A.
+En imagenes, esta clas de clasificadores se emplean para la clasificacion de pixeles, y pueden ser usados en una amplia gama de aplicaciones, como análisis de imagenes medicas, sistemas biométricos, procesamiento de imagenes, etc.
 realiza un filtrado medio de la imagen A en dos dimensiones. Cada píxel de salida contiene el valor medio en un vecindario de 3 por 3 alrededor del píxel correspondiente de la imagen de entrada. medfilt2 almohadillas de la imagen con 0s en los bordes, por lo que los valores de mediana para los puntos dentro de la mitad de la anchura del vecindario ([m n]/2) de los bordes pueden aparecer distorsionados.
 
 
