@@ -612,7 +612,8 @@ probC2 = (sum(mask21(:))+sum(mask22(:))
 probC3 = (sum(mask31(:))+sum(mask32(:))
 +sum(mask33(:)))/(3*tot);
 
-% Solo por verificar, la probabilidad tendria que ser 1
+% Solo por verificar, la
+% probabilidad tendria que ser 1
 probT = probC1 + probC2 + probC3;
 
 % Concatenamos las regiones 
@@ -711,6 +712,7 @@ En general se puede decir que el clasificador tiene un comportamiento bastante a
 
 \begin{figure}[!h]
 	\caption{Imagen original}
+	\centering
 	\includegraphics*[scale=0.2]{im1}
 	\centering
 \end{figure}
@@ -718,6 +720,7 @@ En general se puede decir que el clasificador tiene un comportamiento bastante a
 
 \begin{figure}[!h]
 	\caption{Imagen original}
+	\centering
 	\includegraphics*[scale=0.2]{im2}
 	\centering
 \end{figure}
@@ -725,6 +728,7 @@ En general se puede decir que el clasificador tiene un comportamiento bastante a
 
 \begin{figure}[!h]
 	\caption{Imagen original}
+	\centering
 	\includegraphics*[scale=0.2]{im3}
 	\centering
 \end{figure}
@@ -732,20 +736,15 @@ En general se puede decir que el clasificador tiene un comportamiento bastante a
 
 \begin{figure}[!h]
 	\caption{Histograma de la imagen filtrada y ajustada}
+	\centering
 	\includegraphics*[scale=0.2]{im4}
 	\centering
 \end{figure}
 
 
-%\begin{figure}[!h]
-%	\caption{Matlab}
-%	\includegraphics*[scale=0.3]{RP_5}
-%	\centering
-%\end{figure}
-
-
 \begin{figure}[!h]
 	\caption{Imagen final recortada}
+	\centering
 	\includegraphics*[scale=0.4]{RP_6}
 	\centering
 	
@@ -754,12 +753,14 @@ En general se puede decir que el clasificador tiene un comportamiento bastante a
 
 \begin{figure}[!h]
 	\caption{Imagen final recortada}
+	\centering
 		\includegraphics*[scale=0.4]{RP_7}
 	\centering
 \end{figure}
 
 \begin{figure}[!h]
 	\caption{Imagen final recortada}
+	\centering
 	\includegraphics*[scale=0.4]{RP_8}
 	\centering
 \end{figure}
@@ -786,7 +787,8 @@ ren = 600;
 col = 600;
 tot = ren*col;
 
-% Abrimos imagenes de entrenamiento como double
+% Abrimos imagenes de entrenamiento 
+% como double
 im1 = double(imread('im1.jpg'));
 im2 = double(imread('im2.jpg'));
 im3 = double(imread('im3.jpg'));
@@ -942,7 +944,8 @@ imagesc(r33);colormap(gray);
 axis square; title('Exterior 3');
 m% Calculamos la probabilidad de cada clase
 
-% Calculamos la probabilidad de cada region/clase
+% Calculamos la probabilidad
+% de cada region/clase
 probC1 = (sum(mask11(:))+
 sum(mask12(:))+sum(mask13(:)))/(3*tot);
 probC2 = (sum(mask21(:))+
@@ -994,7 +997,8 @@ cont = 0;
 for s=1:3
 for x=1:ren
 for y=1:col
-if( mr2(((ren * (s-1)) + x),y) ~= 0)
+if( mr2(((
+ren * (s-1)) + x),y) ~= 0)
 med2(1) = med2(1) + 
 mr2(((ren * (s-1)) + x),y);
 med2(2) = med2(2) + x;
@@ -1011,7 +1015,8 @@ cont = 0;
 for s=1:3
 for x=1:ren
 for y=1:col
-if( mr3(((ren * (s-1)) + x),y) ~= 0)
+if( mr3(((
+ren * (s-1)) + x),y) ~= 0)
 med3(1) = med3(1) + 
 mr3(((ren * (s-1)) + x),y);
 med3(2) = med3(2) + x;
@@ -1030,7 +1035,8 @@ cov1 = zeros(3);
 cov2 = zeros(3);
 cov3 = zeros(3);
 
-% Calculamos la matriz de covarianza para la clase 1
+% Calculamos la matriz de covarianza
+% para la clase 1
 for s=1:3
 for x=1:ren
 for y=1:col
@@ -1058,18 +1064,21 @@ cov1(2, 1) = cov1(1, 2);
 cov1(3, 1) = cov1(1, 3);
 cov1(3, 2) = cov1(2, 3);
 
-% Calculamos la matriz de covarianza para la clase 2
+% Calculamos la matriz de covarianza
+% para la clase 2
 for s=1:3
 for x=1:ren
 for y=1:col
 if( mr2(((ren * (s-1)) + x),y) ~= 0)
 % Diagonal para la clase 2
-cov2(1, 1) = cov2(1, 1) + ((mr2(((ren * (s-1)) + x),y) - med2(1)) ^2);
+cov2(1, 1) = cov2(1, 1) + 
+(mr2(((ren * (s-1)) + x),y) - med2(1)) ^2);
 cov2(2, 2) = cov2(2, 2) + (((ren * (s-1)) - med2(2)) ^2);
 cov2(3, 3) = cov2(3, 3) + ((y - med2(3)) ^2);
 
 %  Triangulo superior para la clase 2
-cov2(1, 2) = cov2(1, 2) + ( (mr2(((ren * (s-1)) + x),y) - med2(1))
+cov2(1, 2) = cov2(1, 2) +
+( (mr2(((ren * (s-1)) + x),y) - med2(1))
 * ((ren * (s-1)) - med2(2)) );
 cov2(1, 3) = cov2(1, 3) + 
 ( (mr2(((ren * (s-1)) + x),y) - med2(1)) * (y - med2(3)) );
