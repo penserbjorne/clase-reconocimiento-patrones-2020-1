@@ -6,318 +6,27 @@
 \usepackage{listings}                                 % Para código
 \usepackage[numbered,framed]{matlab-prettifier}       % Para código M
 \usepackage{graphicx}
-% para imagenes
 
-
-% *** CITATION PACKAGES ***
-%
 \ifCLASSOPTIONcompsoc
-  % The IEEE Computer Society needs nocompress option
-  % requires cite.sty v4.0 or later (November 2003)
+  
   \usepackage[nocompress]{cite}
 \else
-  % normal IEEE
+  
   \usepackage{cite}
 \fi
-% cite.sty was written by Donald Arseneau
-% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
-% \cite{} output to follow that of the IEEE. Loading the cite package will
-% result in citation numbers being automatically sorted and properly
-% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
-% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
-% \cite will automatically add leading space, if needed. Use cite.sty's
-% noadjust option (cite.sty V3.8 and later) if you want to turn this off
-% such as if a citation ever needs to be enclosed in parenthesis.
-% cite.sty is already installed on most LaTeX systems. Be sure and use
-% version 5.0 (2009-03-20) and later if using hyperref.sty.
-% The latest version can be obtained at:
-% http://www.ctan.org/pkg/cite
-% The documentation is contained in the cite.sty file itself.
-%
-% Note that some packages require special options to format as the Computer
-% Society requires. In particular, Computer Society  papers do not use
-% compressed citation ranges as is done in typical IEEE papers
-% (e.g., [1]-[4]). Instead, they list every citation separately in order
-% (e.g., [1], [2], [3], [4]). To get the latter we need to load the cite
-% package with the nocompress option which is supported by cite.sty v4.0
-% and later.
 
-
-% *** GRAPHICS RELATED PACKAGES ***
-%
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+
 \else
-  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
-  % will default to the driver specified in the system graphics.cfg if no
-  % driver is specified.
-  % \usepackage[dvips]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.eps}
+ 
 \fi
-% graphicx was written by David Carlisle and Sebastian Rahtz. It is
-% required if you want graphics, photos, etc. graphicx.sty is already
-% installed on most LaTeX systems. The latest version and documentation
-% can be obtained at: 
-% http://www.ctan.org/pkg/graphicx
-% Another good source of documentation is "Using Imported Graphics in
-% LaTeX2e" by Keith Reckdahl which can be found at:
-% http://www.ctan.org/pkg/epslatex
-%
-% latex, and pdflatex in dvi mode, support graphics in encapsulated
-% postscript (.eps) format. pdflatex in pdf mode supports graphics
-% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
-% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
-% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
-% which can result in "jaggedy"/blurry rendering of lines and letters as
-% well as large increases in file sizes.
-%
-% You can find documentation about the pdfTeX application at:
-% http://www.tug.org/applications/pdftex
 
-
-% *** MATH PACKAGES ***
-%
 \usepackage{amsmath}
-% A popular package from the American Mathematical Society that provides
-% many useful and powerful commands for dealing with mathematics.
-%
-% Note that the amsmath package sets \interdisplaylinepenalty to 10000
-% thus preventing page breaks from occurring within multiline equations. Use:
+
 \interdisplaylinepenalty=2500
-% after loading amsmath to restore such page breaks as IEEEtran.cls normally
-% does. amsmath.sty is already installed on most LaTeX systems. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/amsmath
 
-
-% *** SPECIALIZED LIST PACKAGES ***
 \usepackage{algorithmic}
-% algorithmic.sty was written by Peter Williams and Rogerio Brito.
-% This package provides an algorithmic environment fo describing algorithms.
-% You can use the algorithmic environment in-text or within a figure
-% environment to provide for a floating algorithm. Do NOT use the algorithm
-% floating environment provided by algorithm.sty (by the same authors) or
-% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
-% algorithm float types and packages that provide these will not provide
-% correct IEEE style captions. The latest version and documentation of
-% algorithmic.sty can be obtained at:
-% http://www.ctan.org/pkg/algorithms
-% Also of interest may be the (relatively newer and more customizable)
-% algorithmicx.sty package by Szasz Janos:
-% http://www.ctan.org/pkg/algorithmicx
 
-
-
-
-% *** ALIGNMENT PACKAGES ***
-%
-%\usepackage{array}
-% Frank Mittelbach's and David Carlisle's array.sty patches and improves
-% the standard LaTeX2e array and tabular environments to provide better
-% appearance and additional user controls. As the default LaTeX2e table
-% generation code is lacking to the point of almost being broken with
-% respect to the quality of the end results, all users are strongly
-% advised to use an enhanced (at the very least that provided by array.sty)
-% set of table tools. array.sty is already installed on most systems. The
-% latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/array
-
-
-%\usepackage{mdwmath}
-%\usepackage{mdwtab}
-% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
-% especially mdwmath.sty and mdwtab.sty which are used to format equations
-% and tables, respectively. The MDWtools set is already installed on most
-% LaTeX systems. The lastest version and documentation is available at:
-% http://www.ctan.org/pkg/mdwtools
-
-
-% IEEEtran contains the IEEEeqnarray family of commands that can be used to
-% generate multiline equations as well as matrices, tables, etc., of high
-% quality.
-
-
-%\usepackage{eqparbox}
-% Also of notable interest is Scott Pakin's eqparbox package for creating
-% (automatically sized) equal width boxes - aka "natural width parboxes".
-% Available at:
-% http://www.ctan.org/pkg/eqparbox
-
-
-% *** SUBFIGURE PACKAGES ***
-%\ifCLASSOPTIONcompsoc
-%  \usepackage[caption=false,font=footnotesize,labelfont=sf,textfont=sf]{subfig}
-%\else
-%  \usepackage[caption=false,font=footnotesize]{subfig}
-%\fi
-% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
-% for subfigure.sty, the latter of which is no longer maintained and is
-% incompatible with some LaTeX packages including fixltx2e. However,
-% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
-% which will override IEEEtran.cls' handling of captions and this will result
-% in non-IEEE style figure/table captions. To prevent this problem, be sure
-% and invoke subfig.sty's "caption=false" package option (available since
-% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
-% handling of captions.
-% Note that the Computer Society format requires a sans serif font rather
-% than the serif font used in traditional IEEE formatting and thus the need
-% to invoke different subfig.sty package options depending on whether
-% compsoc mode has been enabled.
-%
-% The latest version and documentation of subfig.sty can be obtained at:
-% http://www.ctan.org/pkg/subfig
-
-
-% *** FLOAT PACKAGES ***
-%
-%\usepackage{fixltx2e}
-% fixltx2e, the successor to the earlier fix2col.sty, was written by
-% Frank Mittelbach and David Carlisle. This package corrects a few problems
-% in the LaTeX2e kernel, the most notable of which is that in current
-% LaTeX2e releases, the ordering of single and double column floats is not
-% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
-% single column figure to be placed prior to an earlier double column
-% figure.
-% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
-% corrections already built into the system in which case a warning will
-% be issued if an attempt is made to load fixltx2e.sty as it is no longer
-% needed.
-% The latest version and documentation can be found at:
-% http://www.ctan.org/pkg/fixltx2e
-
-
-%\usepackage{stfloats}
-% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
-% the ability to do double column floats at the bottom of the page as well
-% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
-% LaTeX2e). It also provides a command:
-%\fnbelowfloat
-% to enable the placement of footnotes below bottom floats (the standard
-% LaTeX2e kernel puts them above bottom floats). This is an invasive package
-% which rewrites many portions of the LaTeX2e float routines. It may not work
-% with other packages that modify the LaTeX2e float routines. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/stfloats
-% Do not use the stfloats baselinefloat ability as the IEEE does not allow
-% \baselineskip to stretch. Authors submitting work to the IEEE should note
-% that the IEEE rarely uses double column equations and that authors should try
-% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
-% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
-% such ways.
-% Do not attempt to use stfloats with fixltx2e as they are incompatible.
-% Instead, use Morten Hogholm'a dblfloatfix which combines the features
-% of both fixltx2e and stfloats:
-%
-% \usepackage{dblfloatfix}
-% The latest version can be found at:
-% http://www.ctan.org/pkg/dblfloatfix
-
-
-%\ifCLASSOPTIONcaptionsoff
-%  \usepackage[nomarkers]{endfloat}
-% \let\MYoriglatexcaption\caption
-% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
-%\fi
-% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
-% Axel Sommerfeldt. This package may be useful when used in conjunction with 
-% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
-% submissions have lists of figures/tables at the end of the paper and that
-% figures/tables without any captions are placed on a page by themselves at
-% the end of the document. If needed, the draftcls IEEEtran class option or
-% \CLASSINPUTbaselinestretch interface can be used to increase the line
-% spacing as well. Be sure and use the nomarkers option of endfloat to
-% prevent endfloat from "marking" where the figures would have been placed
-% in the text. The two hack lines of code above are a slight modification of
-% that suggested by in the endfloat docs (section 8.4.1) to ensure that
-% the full captions always appear in the list of figures/tables - even if
-% the user used the short optional argument of \caption[]{}.
-% IEEE papers do not typically make use of \caption[]'s optional argument,
-% so this should not be an issue. A similar trick can be used to disable
-% captions of packages such as subfig.sty that lack options to turn off
-% the subcaptions:
-% For subfig.sty:
-% \let\MYorigsubfloat\subfloat
-% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
-% However, the above trick will not work if both optional arguments of
-% the \subfloat command are used. Furthermore, there needs to be a
-% description of each subfigure *somewhere* and endfloat does not add
-% subfigure captions to its list of figures. Thus, the best approach is to
-% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
-% and instead reference/explain all the subfigures within the main caption.
-% The latest version of endfloat.sty and its documentation can obtained at:
-% http://www.ctan.org/pkg/endfloat
-%
-% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
-% later in the document, say, to conditionally put the References on a 
-% page by themselves.
-
-
-
-
-
-% *** PDF, URL AND HYPERLINK PACKAGES ***
-%
-%\usepackage{url}
-% url.sty was written by Donald Arseneau. It provides better support for
-% handling and breaking URLs. url.sty is already installed on most LaTeX
-% systems. The latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/url
-% Basically, \url{my_url_here}.
-
-
-% NOTE: PDF thumbnail features are not required in IEEE papers
-%       and their use requires extra complexity and work.
-%\ifCLASSINFOpdf
-%  \usepackage[pdftex]{thumbpdf}
-%\else
-%  \usepackage[dvips]{thumbpdf}
-%\fi
-% thumbpdf.sty and its companion Perl utility were written by Heiko Oberdiek.
-% It allows the user a way to produce PDF documents that contain fancy
-% thumbnail images of each of the pages (which tools like acrobat reader can
-% utilize). This is possible even when using dvi->ps->pdf workflow if the
-% correct thumbpdf driver options are used. thumbpdf.sty incorporates the
-% file containing the PDF thumbnail information (filename.tpm is used with
-% dvips, filename.tpt is used with pdftex, where filename is the base name of
-% your tex document) into the final ps or pdf output document. An external
-% utility, the thumbpdf *Perl script* is needed to make these .tpm or .tpt
-% thumbnail files from a .ps or .pdf version of the document (which obviously
-% does not yet contain pdf thumbnails). Thus, one does a:
-% 
-% thumbpdf filename.pdf 
-%
-% to make a filename.tpt, and:
-%
-% thumbpdf --mode dvips filename.ps
-%
-% to make a filename.tpm which will then be loaded into the document by
-% thumbpdf.sty the NEXT time the document is compiled (by pdflatex or
-% latex->dvips->ps2pdf). Users must be careful to regenerate the .tpt and/or
-% .tpm files if the main document changes and then to recompile the
-% document to incorporate the revised thumbnails to ensure that thumbnails
-% match the actual pages. It is easy to forget to do this!
-% 
-% Unix systems come with a Perl interpreter. However, MS Windows users
-% will usually have to install a Perl interpreter so that the thumbpdf
-% script can be run. The Ghostscript PS/PDF interpreter is also required.
-% See the thumbpdf docs for details. The latest version and documentation
-% can be obtained at.
-% http://www.ctan.org/pkg/thumbpdf
-
-
-% NOTE: PDF hyperlink and bookmark features are not required in IEEE
-%       papers and their use requires extra complexity and work.
-% *** IF USING HYPERREF BE SURE AND CHANGE THE EXAMPLE PDF ***
-% *** TITLE/SUBJECT/AUTHOR/KEYWORDS INFO BELOW!!           ***
 \newcommand\MYhyperrefoptions{bookmarks=true,bookmarksnumbered=true,
 pdfpagemode={UseOutlines},plainpages=false,pdfpagelabels=true,
 colorlinks=true,linkcolor={black},citecolor={black},urlcolor={black},
@@ -326,62 +35,7 @@ pdfsubject={Typesetting},%<!CHANGE!
 pdfauthor={Michael D. Shell},%<!CHANGE!
 pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
              template}}%<^!CHANGE!
-%\ifCLASSINFOpdf
-%\usepackage[\MYhyperrefoptions,pdftex]{hyperref}
-%\else
-%\usepackage[\MYhyperrefoptions,breaklinks=true,dvips]{hyperref}
-%\usepackage{breakurl}
-%\fi
-% One significant drawback of using hyperref under DVI output is that the
-% LaTeX compiler cannot break URLs across lines or pages as can be done
-% under pdfLaTeX's PDF output via the hyperref pdftex driver. This is
-% probably the single most important capability distinction between the
-% DVI and PDF output. Perhaps surprisingly, all the other PDF features
-% (PDF bookmarks, thumbnails, etc.) can be preserved in
-% .tex->.dvi->.ps->.pdf workflow if the respective packages/scripts are
-% loaded/invoked with the correct driver options (dvips, etc.). 
-% As most IEEE papers use URLs sparingly (mainly in the references), this
-% may not be as big an issue as with other publications.
-%
-% That said, Vilar Camara Neto created his breakurl.sty package which
-% permits hyperref to easily break URLs even in dvi mode.
-% Note that breakurl, unlike most other packages, must be loaded
-% AFTER hyperref. The latest version of breakurl and its documentation can
-% be obtained at:
-% http://www.ctan.org/pkg/breakurl
-% breakurl.sty is not for use under pdflatex pdf mode.
-%
-% The advanced features offer by hyperref.sty are not required for IEEE
-% submission, so users should weigh these features against the added
-% complexity of use.
-% The package options above demonstrate how to enable PDF bookmarks
-% (a type of table of contents viewable in Acrobat Reader) as well as
-% PDF document information (title, subject, author and keywords) that is
-% viewable in Acrobat reader's Document_Properties menu. PDF document
-% information is also used extensively to automate the cataloging of PDF
-% documents. The above set of options ensures that hyperlinks will not be
-% colored in the text and thus will not be visible in the printed page,
-% but will be active on "mouse over". USING COLORS OR OTHER HIGHLIGHTING
-% OF HYPERLINKS CAN RESULT IN DOCUMENT REJECTION BY THE IEEE, especially if
-% these appear on the "printed" page. IF IN DOUBT, ASK THE RELEVANT
-% SUBMISSION EDITOR. You may need to add the option hypertexnames=false if
-% you used duplicate equation numbers, etc., but this should not be needed
-% in normal IEEE work.
-% The latest version of hyperref and its documentation can be obtained at:
-% http://www.ctan.org/pkg/hyperref
 
-
-
-
-
-% *** Do not adjust lengths that control margins, column widths, etc. ***
-% *** Do not use packages that alter fonts (such as pslatex).         ***
-% There should be no need to do such things with IEEEtran.cls V1.6 and later.
-% (Unless specifically asked to do so by the journal or conference you plan
-% to submit to, of course. )
-
-
-% correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 
@@ -393,7 +47,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Clasificador Bayesiano}
+\title{RECONOCIMIENTO POR TEXTURA }
 %
 %
 % author names and IEEE memberships
@@ -418,8 +72,8 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % received ..."  text while in non-compsoc journals this is reversed. Sigh.
 
 \author{Paul Sebastian~Aguilar Enriquez,
-        Carlos Ignacio~Padilla Herrera
-        y ~Simón Eduardo~Ramírez Ancona% <-this % stops a space
+	Carlos Ignacio~Padilla Herrera
+	y ~Simón Eduardo~Ramírez Ancona% <-this % stops a space
 %\IEEEcompsocitemizethanks{
 %  \IEEEcompsocthanksitem Pie 
  % \IEEEcompsocthanksitem Pie
@@ -461,13 +115,16 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-Este documento presenta la implementación de un clasificador bayesiano para imágenes de galaxias utilizando MATLAB. Se muestran imágenes del proceso, así como del resultado final. Se da un breve repaso acerca del clasificador bayesiano. Se muestra el código fuente del clasificador implementado.
+Este documento presenta la implementación de un Reconocedor de texturas para imágenes de brodatz utilizando MATLAB.
+Se muestran imágenes del proceso, así como del resultado final. 
+Se da un breve introducción de image retrieval, análisis de texturas, métodos de validación y KNN.
+Se muestra el código fuente del clasificador implementado.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Pattern Recognition, Bayesian, Filters, Galaxies, Covariance, MATLAB.
-\end{IEEEkeywords}}
+Pattern Recognition, Image retrieval, KNN, PCA, Texture analysis, MATLAB.
+\end{IEEEkeywords}
 
 
 % make the title area
@@ -495,7 +152,8 @@ Pattern Recognition, Bayesian, Filters, Galaxies, Covariance, MATLAB.
 El alumno:
 
 \begin{enumerate}
-  \item Clasificará imagenes de la vía lactéa en 3 regiones con ayuda del clasificador Bayesiano.
+  \item aprenderá el concepto de "image retrieval" basado en análisis de texturas.
+  \item entenderá cuando y cómo utilizar clasificadores como KNN, LDA (Fisher) o máquinas de soporte vectorial (SVM).
  % \item Entenderá cómo aumentar las características de contraste y perfilado que apoyen a una mejor medición.
 \end{enumerate}
 
@@ -505,16 +163,8 @@ El alumno:
  
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{P}ara la clasificación de datos existen muchas aproximaciones posibles, ya sean supervisadas o no supervisadas. Entre ellos se encuentra el enfoque bayesiano que ofrece clasificadores optimos.
-El clasificador bayesiano es un tipo de clasificador supervisado basado en la probabilidad, el teorema de Bayes y conocimiento a priori, es decir, probabilidad de que se tiene antes de realizar el ejercicio. Realiza la asignación en alguna de las clases mediante el cálculo de la probabilidad de pertenecer a cada una de ellas, realizandose la asignación de mayor probabilidad
-El teorema de Bayes sobre el cual se fundamente este clasificador es el siguiente:
-P(A|B)= P(A,B)/P(B)=P(A)*P(B|A)/P(B)						(1)
-Donde P(A) es la probabilidad del evento A, P(B) es la probabilidad del evento B, P(A|B) es la probabilidad de A dado B y P(B|A) es la probabilidad de B dado A.
-En imagenes, esta clase de clasificadores se emplean para la clasificacion de pixeles, y pueden ser usados en una amplia gama de aplicaciones, como análisis de imagenes medicas, sistemas biométricos, procesamiento de imagenes, etc.
-Para obtener la probabilidad de que un elemento pertenezca a una clase se ocupa la ecuación 1 haciendo el término normalizador P(B) igual a 1 y se obtiene:
-Yk=P(x|Ck)*P(Ck)					(2)
-Donde Yk es la probabilidad de pertenecer a la clase k.
-P(x|Ck) es la probabilidad de x dada la clase k y P(Ck) es la probabilidad de la clase k.
+\IEEEPARstart{R}ealice una investigación sobre image retrieval, análisis de texturas, métodos de validación y clasificadores
+KNN, LDA y máquinas de soporte vectorial.
 
 
 
@@ -525,10 +175,15 @@ P(x|Ck) es la probabilidad de x dada la clase k y P(Ck) es la probabilidad de la
 \section{Desarrollo}
 
 \begin{enumerate}
-  \item Adecuar las imagenes con filtrado para ruido
-  \item Definimos el entrenamiento en zonas por clase
-  \item Calculamos la covarianza y la media
-  \item Calculamos la probabilidad
+  \item Generamos un sistema de recuperación de imágenes mediante un proceso de reconocimiento de patrones.
+  \item Usamos 5 imágenes para el proceso.
+  \item Subdividimos la imágen en varias subimagenes, guardando 3 de las mismas para el proceso de recuperación de carácteristicas
+  que entrega la matriz de Haralick o gray level cocurrence matrix (GLCM).
+  \item Obtuvimos la entropía, energía y generamos el vector de carácteristicas.
+  \item Aplicamos un clasificador con los vectores de datos obtenidos.
+  \item Programamos un clasificador basado en la distancia mínima entre vectores.
+  \item Usamos LDA, Bayes, KNN y SVM.
+  \item Realizamos una comparación entre clasificadores
 \end{enumerate}
 
 
@@ -542,161 +197,8 @@ Este preprocesamiento de las imágenes se realiza para reducir el ruido y homoge
 A continuación se modificó el tamaño y propiedades de las imagenes para homogeneizarlas:
 
 \begin{lstlisting}[language=Matlab, basicstyle=\small]
+% Codigo en MATLAB de la practica 3
 
-% Tamanio a utilizar en las imagenes
-ren = 600;
-col = 600;
-tot = ren*col;
-
-% Abrimos imagenes de entrenamiento como double
-im1 = double(imread('im1.jpg'));
-im2 = double(imread('im2.jpg'));
-im3 = double(imread('im3.jpg'));
-
-% Recortamos imagenes
-im1 = im1(1:ren,1:col);
-im2 = im2(1:ren,1:col);
-im3 = im3(1:ren,1:col);
-
-%% Filtramos las imagenes con un filtro gaussiano
-
-% imgaussfilt filtra la imagen con un kernel alisador 2-D de Gauss con
-% desviacion estandar de 0,5.
-im1f = imgaussfilt(im1);
-im2f = imgaussfilt(im2);
-im3f = imgaussfilt(im3);
-
-\end{lstlisting}
-
-Aplicamos la siguiente mascara a las imagenes:
-
-\begin{lstlisting}[language=Matlab,basicstyle=\small]
-% Desplegamos imagenes filtradas
-
-figure;
-
-% Mascaras de imagen 1
-subplot(3, 5, 1);
-imagesc(im1); axis square; title('Original 1');
-
-subplot(3, 5, 2);
-imagesc(im1f); colormap(gray);axis square;
- title('Filtrada 1');
-
-subplot(3, 5, 3);
-imagesc(r11);colormap(gray); axis square;
- title('Centro 1');
-
-subplot(3, 5, 4);
-imagesc(r21);colormap(gray); axis square; 
-title('Halo 1');
-
-subplot(3, 5, 5);
-imagesc(r31);colormap(gray); axis square;
- title('Exterior 1');
-
-\end{lstlisting}
-
-
-Calculamos matrices para las medias y calculamos la probabilidad de las medias:
-
-\begin{lstlisting}[language=Matlab, basicstyle=\small]
-
-% Calculamos la probabilidad de cada clase
-
-% Calculamos la probabilidad de cada region/clase
- = (sum(mask11(:))+sum(mask12(:))
-+sum(mask13(:)))/(3*tot);
-probC2 = (sum(mask21(:))+sum(mask22(:))
-+sum(mask23(:)))/(3*tot);
-probC3 = (sum(mask31(:))+sum(mask32(:))
-+sum(mask33(:)))/(3*tot);
-
-% Solo por verificar, la
-% probabilidad tendria que ser 1
-probT = probC1 + probC2 + probC3;
-
-% Concatenamos las regiones 
-%en una sola matriz para cada clase
-
-% Matriz de las regiones de la clase 1
-mr1 = cat(1,r11,r12,r13);
-
-% Matriz de las regiones de la clase 2
-mr2 = cat(1,r21,r22,r23);
-
-% Matriz de las regiones de la clase 3
-mr3 = cat(1,r31,r32,r33);
-
-%% Calculamos la media de cada clase
-
-% Creamos las matrices para las medias
-med1 = zeros([3 1]);
-med2 = zeros([3 1]);
-med3 = zeros([3 1]);
-
-\end{lstlisting}
-
-
-Luego procedimos a calcular las medias para cada una de las clases y creamos las matrices para las covarianzas
-
-\begin{lstlisting}[language=Matlab, basicstyle=\small]
-  % Calculamos la media para la clase 1
-  cont = 0;
-  for s=1:3
-  for x=1:ren
-  for y=1:col
-  if( mr1(((ren * (s-1)) + x),y) ~= 0)
-  med1(1) = med1(1) +
-   mr1(((ren * (s-1)) + x),y);
-  med1(2) = med1(2) + x;
-   med1(3) = med1(3) + y;
- cont = cont + 1;
-        end
-      end
-    end
-  end
-  med1 = med1 / cont;
-
-
-% Creamos las matrices para las covarianzas
-cov1 = zeros(3);
-cov2 = zeros(3);
-cov3 = zeros(3);
-
-% Calculamos la matriz de covarianza para la clase 1
-for s=1:3
-for x=1:ren
-for y=1:col
-if( mr1(((ren * (s-1)) + x),y) ~= 0)
-% Diagonal para la clase 1
- cov1(1, 1) = cov1(1, 1) + 
- ((mr1(((ren * (s-1)) + x),y)
-  - med1(1)) ^2);
-cov1(2, 2) = cov1(2, 2) + 
-(((ren * (s-1)) - med1(2)) ^2);
-cov1(3, 3) = cov1(3, 3) +
- ((y - med1(3)) ^2);
-            
- %  Triangulo superior para la clase 1
- cov1(1, 2) = cov1(1, 2) + 
-( (mr1(((ren * (s-1)) + x),y)
-- med1(1)) * ((ren * (s-1)) - med1(2)) );
- cov1(1, 3) = cov1(1, 3) +
- ( (mr1(((ren * (s-1)) + x),y)
-- med1(1)) * (y - med1(3)) );
-cov1(2, 3) = cov1(2, 3) + 
-( ((ren * (s-1)) - med1(2))
- * (y - med1(3)) );
- end
- end
- end
-end
-
-% Triangulo inferior para la clase 1
-cov1(2, 1) = cov1(1, 2);
-cov1(3, 1) = cov1(1, 3);
-cov1(3, 2) = cov1(2, 3);
 \end{lstlisting}
 
 \section{Resultados}
@@ -710,60 +212,60 @@ En general se puede decir que el clasificador tiene un comportamiento bastante a
 %Se empezó con la imagen original
 
 
-\begin{figure}[!h]
-	\caption{Imagen original}
-	\centering
-	\includegraphics*[scale=0.2]{im1}
-	\centering
-\end{figure}
+%\begin{figure}[!h]
+%	\caption{Imagen original}
+%	\centering
+%	\includegraphics*[scale=0.2]{im1}
+%	\centering
+%\end{figure}
 
 
-\begin{figure}[!h]
-	\caption{Imagen original}
-	\centering
-	\includegraphics*[scale=0.2]{im2}
-	\centering
-\end{figure}
+%\begin{figure}[!h]
+%	\caption{Imagen original}
+%	\centering
+%	\includegraphics*[scale=0.2]{im2}
+%	\centering
+%\end{figure}
 
 
-\begin{figure}[!h]
-	\caption{Imagen original}
-	\centering
-	\includegraphics*[scale=0.2]{im3}
-	\centering
-\end{figure}
+%\begin{figure}[!h]
+%	\caption{Imagen original}
+%	\centering
+%	\includegraphics*[scale=0.2]{im3}
+%	\centering
+%\end{figure}
 
 
-\begin{figure}[!h]
-	\caption{Histograma de la imagen filtrada y ajustada}
-	\centering
-	\includegraphics*[scale=0.2]{im4}
-	\centering
-\end{figure}
+%\begin{figure}[!h]
+%	\caption{Histograma de la imagen filtrada y ajustada}
+%	\centering
+%	\includegraphics*[scale=0.2]{im4}
+%	\centering
+%\end{figure}
 
 
-\begin{figure}[!h]
-	\caption{Imagen final recortada}
-	\centering
-	\includegraphics*[scale=0.4]{RP_6}
-	\centering
+%\begin{figure}[!h]
+%	\caption{Imagen final recortada}
+%	\centering
+%	\includegraphics*[scale=0.4]{RP_6}
+%	\centering
 	
-\end{figure}
+%\end{figure}
 
 
-\begin{figure}[!h]
-	\caption{Imagen final recortada}
-	\centering
-		\includegraphics*[scale=0.4]{RP_7}
-	\centering
-\end{figure}
+%\begin{figure}[!h]
+%	\caption{Imagen final recortada}
+%	\centering
+%		\includegraphics*[scale=0.4]{RP_7}
+%	\centering
+% \end{figure}
 
-\begin{figure}[!h]
-	\caption{Imagen final recortada}
-	\centering
-	\includegraphics*[scale=0.4]{RP_8}
-	\centering
-\end{figure}
+% \begin{figure}[!h]
+%	\caption{Imagen final recortada}
+%	\centering
+%	\includegraphics*[scale=0.4]{RP_8}
+%	\centering
+% \end{figure}
 
 
 
@@ -771,463 +273,8 @@ En general se puede decir que el clasificador tiene un comportamiento bastante a
 \section{Código fuente}
 
 \begin{lstlisting}
-[language=Matlab,basicstyle=\small]
-%% Limpiamos entorno
 
-close all;
-%clear all;
-clear variables;
-clear global;
-clc;
-
-% Abrimos imagenes y las recortamos 
-
-% Tamanio a utilizar en las imagenes
-ren = 600;
-col = 600;
-tot = ren*col;
-
-% Abrimos imagenes de entrenamiento 
-% como double
-im1 = double(imread('im1.jpg'));
-im2 = double(imread('im2.jpg'));
-im3 = double(imread('im3.jpg'));
-
-% Recortamos imagenes
-im1 = im1(1:ren,1:col);
-im2 = im2(1:ren,1:col);
-im3 = im3(1:ren,1:col);
-
-%% Filtramos las imagenes con un filtro gaussiano
-
-% imgaussfilt filtra la imagen 
-con un kernel alisador 2-D de Gauss con
-% desviacion estandar de 0,5.
-im1f = imgaussfilt(im1);
-im2f = imgaussfilt(im2);
-im3f = imgaussfilt(im3);
-
-% Creamos las mascaras sobre las imagenes filtradas
-
-% Mascaras de imagen 1
-figure;
-imagesc(im1f);colormap(gray); 
-axis square; title('Centro 1');
-mask11=createMask(drawfreehand());
-close all
-
-figure;
-imagesc(im1f);colormap(gray);
- axis square; title('Halo 1');
-mask21=createMask(drawfreehand());
-close all
-
-figure;imagesc(im1f);colormap(gray);
- axis square; title('Exterior 1');
-mask31=createMask(drawfreehand());
-close all
-
-% Mascaras de imagen 2
-figure;imagesc(im2f);colormap(gray);
- axis square; title('Centro 2');
-mask12=createMask(drawfreehand());
-close all
-
-figure;imagesc(im2f);colormap(gray);
-axis square; title('Halo 2');
-mask22=createMask(drawfreehand());
-close all
-
-figure;imagesc(im2f);colormap(gray);
- axis square; title('Exterior 2');
-mask32=createMask(drawfreehand());
-close all
-
-% Mascaras de imagen 3
-figure;imagesc(im3f);colormap(gray);
-axis square; title('Centro 3');
-mask13=createMask(drawfreehand());
-close all
-
-figure;imagesc(im3f);colormap(gray); 
-axis square; title('Halo 3');
-mask23=createMask(drawfreehand());
-close all
-
-figure;imagesc(im3f);colormap(gray);
- axis square; title('Exterior 3');
-mask33=createMask(drawfreehand());
-close all
-
-% Aplicamos las mascaras a las imagenes
-
-% Obtenemos las regiones
-% de la clase 1
-r11 = immultiply(im1f,double(mask11));
-r12 = immultiply(im2f,double(mask12));
-r13 = immultiply(im3f,double(mask13));
-
-% Obtenemos las regiones de la clase 2
-r21 = immultiply(im1f,double(mask21));
-r22 = immultiply(im2f,double(mask22));
-r23 = immultiply(im3f,double(mask23));
-
-% Obtenemos las regiones de la clase 3
-r31 = immultiply(im1f,double(mask31));
-r32 = immultiply(im2f,double(mask32));
-r33 = immultiply(im3f,double(mask33));
-
-% Desplegamos imagenes filtradas
-
-figure;
-
-% Mascaras de imagen 1
-subplot(3, 5, 1);
-imagesc(im1); axis square; title('Original 1');
-
-subplot(3, 5, 2);
-imagesc(im1f); colormap(gray);
-axis square; title('Filtrada 1');
-
-subplot(3, 5, 3);
-imagesc(r11);colormap(gray); 
-axis square; title('Centro 1');
-
-subplot(3, 5, 4);
-imagesc(r21);colormap(gray);
- axis square; title('Halo 1');
-
-subplot(3, 5, 5);
-imagesc(r31);colormap(gray); 
-axis square; title('Exterior 1');
-
-%%%% Mascaras de imagen 2
-subplot(3, 5, 6);
-imagesc(im2); axis square; 
-title('Original 2');
-
-subplot(3, 5, 7);
-imagesc(im2f); colormap(gray);
-axis square; title('Filtrada 2');
-
-subplot(3, 5, 8);
-imagesc(r12);colormap(gray); 
-axis square; title('Centro 2');
-
-subplot(3, 5, 9);
-imagesc(r22);colormap(gray); 
-axis square; title('Halo 2');
-
-subplot(3, 5, 10);
-imagesc(r32);colormap(gray);
- axis square; title('Exterior 2');
-
-%%%% Mascaras de imagen 3
-subplot(3, 5, 11);
-imagesc(im3); axis square; 
-title('Original 3');
-
-subplot(3, 5, 12);
-imagesc(im3f); colormap(gray);
-axis square; title('Filtrada 3');
-
-subplot(3, 5, 13);
-imagesc(r13);colormap(gray); 
-axis square; title('Centro 3');
-
-subplot(3, 5, 14);
-imagesc(r23);colormap(gray); 
-axis square; title('Halo 3');
-
-subplot(3, 5, 15);
-imagesc(r33);colormap(gray); 
-axis square; title('Exterior 3');
-m% Calculamos la probabilidad de cada clase
-
-% Calculamos la probabilidad
-% de cada region/clase
-probC1 = (sum(mask11(:))+
-sum(mask12(:))+sum(mask13(:)))/(3*tot);
-probC2 = (sum(mask21(:))+
-sum(mask22(:))+sum(mask23(:)))/(3*tot);
-probC3 = (sum(mask31(:))+
-sum(mask32(:))+sum(mask33(:)))/(3*tot);
-
-% Solo por verificar, la probabilidad tendria que ser 1
-probT = probC1 + probC2 + probC3;
-
-% Concatenamos las regiones en una
-% sola matriz para cada clase
-
-% Matriz de las regiones de la clase 1
-mr1 = cat(1,r11,r12,r13);
-
-% Matriz de las regiones de la clase 2
-mr2 = cat(1,r21,r22,r23);
-
-% Matriz de las regiones de la clase 3
-mr3 = cat(1,r31,r32,r33);
-
-%% Calculamos la media de cada clase
-
-% Creamos las matrices para las medias
-med1 = zeros([3 1]);
-med2 = zeros([3 1]);
-med3 = zeros([3 1]);
-
-% Calculamos la media para la clase 1
-cont = 0;
-for s=1:3
-for x=1:ren
-for y=1:col
-if( mr1(((ren * (s-1)) + x),y) ~= 0)
-med1(1) = med1(1) +
- mr1(((ren * (s-1)) + x),y);
-med1(2) = med1(2) + x;
-med1(3) = med1(3) + y;
-cont = cont + 1;
-end
-end
-end
-end
-med1 = med1 / cont;
-
-% Calculamos la media para la clase 2
-cont = 0;
-for s=1:3
-for x=1:ren
-for y=1:col
-if( mr2(((
-ren * (s-1)) + x),y) ~= 0)
-med2(1) = med2(1) + 
-mr2(((ren * (s-1)) + x),y);
-med2(2) = med2(2) + x;
-med2(3) = med2(3) + y;
-cont = cont + 1;
-end
-end
-end
-end
-med2 = med2 / cont;
-
-% Calculamos la media para la clase 3
-cont = 0;
-for s=1:3
-for x=1:ren
-for y=1:col
-if( mr3(((
-ren * (s-1)) + x),y) ~= 0)
-med3(1) = med3(1) + 
-mr3(((ren * (s-1)) + x),y);
-med3(2) = med3(2) + x;
-med3(3) = med3(3) + y;
-cont = cont + 1;
-end
-end
-end
-end
-med3 = med3 / cont;
-
-% Calculamos la covarianza de cada clase
-
-% Creamos las matrices para las covarianzas
-cov1 = zeros(3);
-cov2 = zeros(3);
-cov3 = zeros(3);
-
-% Calculamos la matriz de covarianza
-% para la clase 1
-for s=1:3
-for x=1:ren
-for y=1:col
-if( mr1(((ren * (s-1)) + x),y) ~= 0)
-% Diagonal para la clase 1
-cov1(1, 1) = cov1(1, 1) + ((mr1(((
-ren * (s-1)) + x),y) - med1(1)) ^2);
-cov1(2, 2) = cov1(2, 2) + (((ren * (s-1)) - med1(2)) ^2);
-cov1(3, 3) = cov1(3, 3) + ((y - med1(3)) ^2);
-
-%  Triangulo superior para la clase 1
-cov1(1, 2) = cov1(1, 2) + ( (mr1(((ren *
-(s-1)) + x),y) - med1(1)) * ((ren * (s-1)) - med1(2)) );
-cov1(1, 3) = cov1(1, 3) + ( (mr1(((ren * (s-1)) + x),y)
- - med1(1)) * (y - med1(3)) );
-cov1(2, 3) = cov1(2, 3) + 
-( ((ren * (s-1)) - med1(2)) * (y - med1(3)) );
-end
-end
-end
-end
-
-% Triangulo inferior para la clase 1
-cov1(2, 1) = cov1(1, 2);
-cov1(3, 1) = cov1(1, 3);
-cov1(3, 2) = cov1(2, 3);
-
-% Calculamos la matriz de covarianza
-% para la clase 2
-for s=1:3
-for x=1:ren
-for y=1:col
-if( mr2(((ren * (s-1)) + x),y) ~= 0)
-% Diagonal para la clase 2
-cov2(1, 1) = cov2(1, 1) + 
-(mr2(((ren * (s-1)) + x),y) - med2(1)) ^2);
-cov2(2, 2) = cov2(2, 2) + (((ren * (s-1)) - med2(2)) ^2);
-cov2(3, 3) = cov2(3, 3) + ((y - med2(3)) ^2);
-
-%  Triangulo superior para la clase 2
-cov2(1, 2) = cov2(1, 2) +
-( (mr2(((ren * (s-1)) + x),y) - med2(1))
-* ((ren * (s-1)) - med2(2)) );
-cov2(1, 3) = cov2(1, 3) + 
-( (mr2(((ren * (s-1)) + x),y) - med2(1)) * (y - med2(3)) );
-cov2(2, 3) = cov2(2, 3) + 
-( ((ren * (s-1)) - med2(2)) * (y - med2(3)) );
-end
-end
-end
-end
-
-% Triangulo inferior para la clase 2
-cov2(2, 1) = cov2(1, 2);
-cov2(3, 1) = cov2(1, 3);
-cov2(3, 2) = cov2(2, 3);
-
-% Calculamos la matriz de 
-% covarianza para la clase 3
-for s=1:3
-for x=1:ren
-for y=1:col
-if( mr3(((ren * (s-1)) + x),y) ~= 0)
-% Diagonal para la clase 3
-cov3(1, 1) = 
-cov3(1, 1) + 
-((mr3(((ren * (s-1)) + x),y)
-- med3(1)) ^2);
-cov3(2, 2) = 
-cov3(2, 2) + (((ren * (s-1)) - med3(2)) ^2);
-cov3(3, 3) = 
-cov3(3, 3) + ((y - med3(3)) ^2);
-
-%  Triangulo superior para la clase 3
-cov3(1, 2) = cov3(1, 2) +
- ( (mr3(((ren * (s-1)) + x),y) 
- - med3(1)) * ((ren * (s-1)) - med3(2)) );
-cov3(1, 3) = cov3(1, 3) + 
-( (mr3(((ren * (s-1)) + x),y)
- - med3(1)) * (y - med3(3)) );
-cov3(2, 3) = cov3(2, 3) + 
-( ((ren * (s-1)) - med3(2)) * (y - med3(3)) );
-end
-end
-end
-end
-
-% Triangulo inferior para la clase 1
-cov3(2, 1) = cov3(1, 2);
-cov3(3, 1) = cov3(1, 3);
-cov3(3, 2) = cov3(2, 3);
-
-% Calculamos el termino 
-%logaritmico para cada clase
-% -(1/2) * log( det( cov ) )
-
-% Logaritmo para las covarianzas
-logCov = [-(1/2) * log(abs(det(cov1))),
--(1/2) * log(abs(det(cov2))),
- -(1/2) * log(abs(det(cov3)))];
-
-% Logaritmo para las probabilidades
-logProb = [-(1/2) * log(probC1),
- -(1/2) * log(probC2), -(1/2) * log(probC3)];
-
-% Calculamos las matrices inversas 
-% de las matrices de covarianza para cada clase
-covInv1 = inv(cov1);
-covInv2 = inv(cov2);
-covInv3 = inv(cov3);
-
-% Por fin! Clasifiquemos una imagen
-
-% Abrimos imagen a clasificar como double
-im4 = double(imread('im4.jpg'));
-
-% Recortamos imagen
-im4 = im4(1:ren,1:col);
-
-% Filtramos la imagen
-im4f = imgaussfilt(im4);
-
-% Variables para la diferencia
-% entre elementos (x-u)(y-u)
-dif1 = zeros([3 1]);
-dif2 = zeros([3 1]);
-dif3 = zeros([3 1]);
-
-% Creamos la imagen que 
-%vamos a mostrar como clasificada
-im4c = zeros([ren col]);
-
-% Recorremos imagen para procesar pixel a pixel
-for s=1:3
-for x=1:ren
-for y=1:col
-
-% Diferencias con clase 1
-dif1(1) = im4f(x, y) - med1(1);
-dif1(2) = x - med1(2);
-dif1(3) = y - med1(3);
-
-% Diferencias con clase 2
-dif2(1) = im4f(x, y) - med2(1);
-dif2(2) = x - med2(2);
-dif2(3) = y - med2(3);
-
-% Diferencias con clase 3
-dif3(1) = im4f(x, y) - med3(1);
-dif3(2) = x - med3(2);
-dif3(3) = y - med3(3);
-
-%Aplicamos las funciones de probabilidad
-y1 = ((-1/2) * dif1' * covInv1 * dif1)
-+ ((-1/2) * logCov(1)) + logProb(1);
-y2 = ((-1/2) * dif2' * covInv2 * dif2)
- + ((-1/2) * logCov(2)) + logProb(2);
-y3 = ((-1/2) * dif3' * covInv3 * dif3)
- + ((-1/2) * logCov(3)) + logProb(3);
-
-if y1 >= y2 && y1 >= y3
-% Clase 1
-im4c(x, y) = 255;
-end
-
-if y2 >= y1 && y2 >= y3
-% Clase 2
-im4c(x, y) = 127;
-end
-
-if y3 > y1 && y3 > y2
-% Clase 3
-im4c(x, y) = 0;
-end
-end
-end
-end
-
-% Mostramos imagen clasificads
-figure;
-subplot(1, 3, 1);
-imagesc(im4);colormap(gray);
-axis square; title('Original');
-
-subplot(1, 3, 2);
-imagesc(im4f);colormap(gray); 
-axis square; title('Filtrada');
-
-subplot(1, 3, 3);
-imagesc(im4c);colormap(gray);
-axis square; title('Clasificada');
+  Insertar codigo en matlab Aquí
 
 
 \end{lstlisting}
