@@ -1,135 +1,148 @@
-%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%% LDA %%%%
-%%%%%%%%%%%%%%%%%%%
-%% Both Machine learning and bionfirmatics are required to run the code
-%% Written and mantained by Simon, Carlos and Paul
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%     RECONOCIMIENTO DE TEXTURAS                       %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Both Machine learning and bionfirmatics toolbox are required to run the code %
+%% Written and mantained by Simon, Carlos and Paul                              %
+%% 2020-1 Pattern Recognition                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Cleaning the environment
 clear all;
 close all;
 clc
+
 %% Define the number of samples 
 samples = 5;
 level = 10;
 line = 1;
-%% Perfoming analysis using degrees and distance
-distV = 8;
-distH = 8;
+
+%% Perfoming analysis using distance and degrees
+verticalDistance = 8;
+horizontalDistance = 8;
+
+
 %% Image feature extraction (using D6 image)
 for x=1:samples
     for y=1:samples
-        imageX = imread('D6.BMP'); %
+        imageX = imread('D8.BMP'); %
         imageX = rgb2gray(imageX);  % RGB TO GRAY
         imageX = imageX(1*x:64*x,1*y:64*y); % 64*64
         imageX = histeq(imageX, level); %enhance contrast using histogram equalization
-        cocurrenceM = zeros(level);
-        %Feature extraction
-        cocurrenceM = graycomatrix(imageX, 'offset', [distV,distH]);
+        cocurrenceM = zeros(level); % Co-ocurrence matrix
+        
+        % Feature extraction
+        cocurrenceM = graycomatrix(imageX, 'offset', [verticalDistance,horizontalDistance]);
         media = mean(mean(imageX));
         stats = graycoprops(cocurrenceM);
-        % Matriz con vectores de caracteristicas
+        
+        % Feature vector matrix
         vectorP = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
         F(line,:) = vectorP;
-        L(line,:) = 'D6.BMP ';
+        L(line,:) = 'D8.BMP ';
         line = line + 1;
     end
 end
-%Extraccion de caracteristicas de la imagen D64
-%Feature extraction of the image D64
+
+
+%% Feature extraction of the image D48
 line = 1;
 for x=1:samples
     for y=1:samples
-        imageX = imread('D64.BMP');
+        imageX = imread('D48.BMP');
         imageX = rgb2gray(imageX);
         imageX = imageX(1*x:64*x,1*y:64*y);
         imageX = histeq(imageX, level);
         cocurrenceM = zeros(level);
         %Feature extraction
-        cocurrenceM = graycomatrix(imageX, 'offset', [distV,distH]);
+        cocurrenceM = graycomatrix(imageX, 'offset', [verticalDistance,horizontalDistance]);
         media = mean(mean(imageX));
         stats = graycoprops(cocurrenceM);
-        % Matriz con vectores de caracteristicas
+        % Matrix with feature vectors
         vectorP = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
         F2(line,:) = vectorP;
-        L2(line,:) = 'D64.BMP';
+        L2(line,:) = 'D48.BMP';
         line = line + 1;
     end
 end
-%Extraccion de caracteristicas de la imagen 22.tiff
+
+%% Feature extraction of image D26.bmp
 line = 1;
 for x=1:samples
     for y=1:samples
-        imageX = imread('22.tiff');
+        imageX = imread('D26.bmp'); %% change this line asap
         %imageX = rgb2gray(imageX);
         imageX = imageX(1*x:32*x,1*y:32*y);
         imageX = histeq(imageX, level);
         cocurrenceM = zeros(level);
         %Feature extraction
-        cocurrenceM = graycomatrix(imageX, 'offset', [distV,distH]);
+        cocurrenceM = graycomatrix(imageX, 'offset', [verticalDistance,horizontalDistance]);
         media = mean(mean(imageX));
         stats = graycoprops(cocurrenceM);
         % Matriz con vectores de caracteristicas
         vectorP = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
         F3(line,:) = vectorP;
-        L3(line,:) = '22.tiff';
+        L3(line,:) = 'D26.bmp';
         line = line + 1;
     end
 end
-%concatenacion de las matrices
+
+%Matrix concatenation
 Fr = vertcat(F, F2, F3);
 Lr = vertcat(L, L2, L3);
 
-NB = fitcnb(Fr, Lr);
-%Mdl = fitcdiscr(Fr, Lr);
-KNN = ClassificationKNN.fit(Fr, Lr);
+
+NB = fitcnb(Fr, Lr); % Naive Bayes
+%Mdl = fitcdiscr(Fr, Lr); 
+KNN = ClassificationKNN.fit(Fr, Lr); % K nearest neighbor
 
 
-%Set de prueba de D6
+%% Test set using D8.BMP
 
-imgTest = imread('D6.bmp');
-imgTest = rgb2gray(imgTest);
-[x,y]=size(imgTest);
+testImage = imread('D8.bmp'); 
+testImage = rgb2gray(testImage);
+[x,y]=size(testImage);
 line=1;
 for i=1:10
     for j=1:10
-       prueba = imgTest(1*i:(x/10)*i,1*j:(y/10)*j);
-       prueba = histeq(prueba,level);
-       cocurrenceM = graycomatrix(prueba, 'offset', [distV,distH]);
-       media = mean(mean(prueba));
+       test = testImage(1*i:(x/10)*i,1*j:(y/10)*j);
+       test = histeq(test,level);
+       cocurrenceM = graycomatrix(test, 'offset', [verticalDistance,horizontalDistance]);
+       media = mean(mean(test));
        stats = graycoprops(cocurrenceM);
        vectorF = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
        resultado1KNN(line) = {[predict(KNN,vectorF)]};
-       labelsD6(line) = {['D6.BMP ']};
+       labelsD6(line) = {['D8.BMP ']};
        resultado1NB(line)= {[predict(NB,vectorF)]};
        line=line+1;
     end
 end
 
-%Set de prueba de D64
+% Test set of D48
 
-imgTest = imread('D64.bmp');
-imgTest = rgb2gray(imgTest);
-[x,y]=size(imgTest);
+testImage = imread('D48.bmp');
+testImage = rgb2gray(testImage);
+[x,y]=size(testImage);
+
 line=1;
 for i=1:10
     for j=1:10
-       prueba = imgTest(1*i:(x/25)*i,1*j:(y/25)*j);
-       prueba = histeq(prueba,level);
-       cocurrenceM = graycomatrix(prueba, 'offset', [distV,distH]);
-       media = mean(mean(prueba));
+       test = testImage(1*i:(x/25)*i,1*j:(y/25)*j);
+       test = histeq(test,level);
+       cocurrenceM = graycomatrix(test, 'offset', [verticalDistance,horizontalDistance]);
+       media = mean(mean(test));
        stats = graycoprops(cocurrenceM);
        vectorF = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
        resultado2KNN(line) = {[predict(KNN,vectorF)]};
-       labelsD64(line) = {['D64.BMP']};
+       labelsD48(line) = {['D48.BMP']};
        resultado2NB(line)= {[predict(NB,vectorF)]};
        line=line+1;
     end
 end
 
-truthLabels = horzcat(labelsD6, labelsD64);
-outKNN = horzcat(resultado1KNN, resultado2KNN);
-outNB = horzcat(resultado1NB, resultado2NB);
+trueLabels = horzcat(labelsD6, labelsD48);
+outputfromKNN = horzcat(resultado1KNN, resultado2KNN);
+outputNaiveBayes = horzcat(resultado1NB, resultado2NB);
 
-%Analisis con classperf
-CPKNN = classperf(truthLabels, outKNN)
-CPNB = classperf(truthLabels, outNB)
+%% Analysis with classperf from bionformatics toolbox. 
+CPKNN = classperf(trueLabels, outputfromKNN)
+CPNB = classperf(trueLabels, outputNaiveBayes)
