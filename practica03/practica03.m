@@ -1,20 +1,25 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%     RECONOCIMIENTO DE TEXTURAS                       %%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Both Machine learning and bionfirmatics toolbox are required to run the code %
-%% Written and mantained by Simon, Carlos and Paul                              %
-%% 2020-1 Pattern Recognition                                                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% Universidad Nacional Autonoma de México
+% Facultad de Ingeniería
+% Reconocimiento de Patrones
+% 2020-1
+% Practica: Reconocimiento de Texturas
+% Integrantes:
+% Aguilar Enriquez Paul Sebastian
+% Padilla Herrera Carlos Ignacio
+% Ramirez Ancona Simon Eduardo
+% Toolbox:
+% Machine learning, Bionfirmatics
 
 %% Cleaning the environment
-clear all;
+clear var;
+clear globalvar;
 close all;
-clc
+clc;
 
 %% Define the number of samples 
 samples = 5;
 level = 10;
-line = 1;
 
 %% Perfoming analysis using distance and degrees
 verticalDistance = 8;
@@ -22,9 +27,10 @@ horizontalDistance = 8;
 
 
 %% Image feature extraction (using D6 image)
+line = 1;
 for x=1:samples
     for y=1:samples
-        imageX = imread('D8.BMP'); %
+        imageX = imread('D08.bmp'); %
         imageX = rgb2gray(imageX);  % RGB TO GRAY
         imageX = imageX(1*x:64*x,1*y:64*y); % 64*64
         imageX = histeq(imageX, level); %enhance contrast using histogram equalization
@@ -38,17 +44,16 @@ for x=1:samples
         % Feature vector matrix
         vectorP = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
         F(line,:) = vectorP;
-        L(line,:) = 'D8.BMP ';
+        L(line,:) = 'D08.bmp';
         line = line + 1;
     end
 end
-
 
 %% Feature extraction of the image D48
 line = 1;
 for x=1:samples
     for y=1:samples
-        imageX = imread('D48.BMP');
+        imageX = imread('D48.bmp');
         imageX = rgb2gray(imageX);
         imageX = imageX(1*x:64*x,1*y:64*y);
         imageX = histeq(imageX, level);
@@ -60,7 +65,7 @@ for x=1:samples
         % Matrix with feature vectors
         vectorP = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
         F2(line,:) = vectorP;
-        L2(line,:) = 'D48.BMP';
+        L2(line,:) = 'D48.bmp';
         line = line + 1;
     end
 end
@@ -70,7 +75,7 @@ line = 1;
 for x=1:samples
     for y=1:samples
         imageX = imread('D26.bmp'); %% change this line asap
-        %imageX = rgb2gray(imageX);
+        imageX = rgb2gray(imageX);
         imageX = imageX(1*x:32*x,1*y:32*y);
         imageX = histeq(imageX, level);
         cocurrenceM = zeros(level);
@@ -98,7 +103,7 @@ KNN = ClassificationKNN.fit(Fr, Lr); % K nearest neighbor
 
 %% Test set using D8.BMP
 
-testImage = imread('D8.bmp'); 
+testImage = imread('D08.bmp'); 
 testImage = rgb2gray(testImage);
 [x,y]=size(testImage);
 line=1;
@@ -111,7 +116,7 @@ for i=1:10
        stats = graycoprops(cocurrenceM);
        vectorF = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
        resultado1KNN(line) = {[predict(KNN,vectorF)]};
-       labelsD6(line) = {['D8.BMP ']};
+       labelsD6(line) = {['D08.BMP ']};
        resultado1NB(line)= {[predict(NB,vectorF)]};
        line=line+1;
     end
@@ -133,7 +138,7 @@ for i=1:10
        stats = graycoprops(cocurrenceM);
        vectorF = [media stats.Contrast stats.Correlation stats.Energy stats.Homogeneity];
        resultado2KNN(line) = {[predict(KNN,vectorF)]};
-       labelsD48(line) = {['D48.BMP']};
+       labelsD48(line) = {['D48.bmp']};
        resultado2NB(line)= {[predict(NB,vectorF)]};
        line=line+1;
     end
