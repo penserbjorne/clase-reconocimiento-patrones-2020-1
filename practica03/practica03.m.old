@@ -1,0 +1,78 @@
+%% Practica 03
+% Aguilar Enriquez Paul Sebastian
+% Padilla Herrera Carlos Ignacio
+% Ramirez Ancona Simón Eduardo
+clear all;
+close all;
+
+%% Cargamos imágenes
+imds = imageDatastore("./Brodatz")
+
+totalImgTrain = 5;
+totalImgTest = 0;
+imgs = readall(imds);
+imgFeatures = zeros(totalImgTrain, 5);
+
+
+f = 1;
+c = 3;
+ancho = 0.45;
+
+for i = 1:totalImgTrain
+    imgs{i} = rgb2gray(imgs{i});
+    
+    % glcm1
+    glcm = graycomatrix(imgs{i}, 'Offset', [2 0]);
+    stats = graycoprops(glcm, {'all'});
+    values = struct2cell(stats)
+    myContrast = values(1);
+    myCorrelation = values(2)
+    myEnergy = values(3);
+    myHomogeneity = values(4);
+    myEntropy = entropy(imgs{i});
+    % Features 
+    imgFeatures(i, 1) = cell2double(myContrast);
+    imgFeatures(i, 2) = values(2)
+    imgFeatures(i, 3) = values(3);
+    imgFeatures(i, 4) = values(4);
+    imgFeatures(i, 5) = myEntropy;
+    
+    % glcm2
+    glcm2 = graycomatrix(imgs{i}, 'Offset', [4 0]);
+    stats2 = graycoprops(glcm2, {'all'});
+    values2 = struct2cell(stats2)
+    myContrast2 = values2(1);
+    myCorrelation2 = values2(2)
+    myEnergy2 = values2(3);
+    myHomogeneity2 = values2(4);
+    myEntropy2 = entropy(imgs{i});
+
+    %myEnergy = sum(imgs{i}(:));
+    
+    figure;
+    subplot(f, c, 1);
+    imshow(imgs{i});
+    
+    dim = [.5 .8 ancho .05];
+    str = "Contraste: " + myContrast + " ; " + myContrast2;
+    annotation('textbox', dim, 'String',str)
+    
+    dim = [.5 .7 ancho .05];
+    str = "Correlación: " + myCorrelation + " ; " + myCorrelation2;
+    annotation('textbox', dim, 'String',str)
+    
+    dim = [.5 .6 ancho .05];
+    str = "Energia: " + myEnergy + " ; " + myEnergy2;
+    annotation('textbox', dim, 'String',str)
+    
+    dim = [.5 .5 ancho .05];
+    str = "Entropia: " + myEntropy + " ; " + myEntropy2;
+    annotation('textbox', dim, 'String',str)
+    
+    dim = [.5 .4 ancho .05];
+    str = "Homogeneidad: " + myHomogeneity + " ; " + myHomogeneity2;
+    annotation('textbox', dim, 'String',str)
+    
+end
+
+%% 
