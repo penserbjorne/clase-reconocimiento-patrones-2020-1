@@ -7,3 +7,6 @@
 *.synctex.gz
 *.DS_Store
 *.m~
+
+# Notebooks
+*.ipynb_checkpoints
